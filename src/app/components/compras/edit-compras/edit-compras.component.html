@@ -1,0 +1,77 @@
+<div class="row h-100 justify-content-center align-items-center" *ngIf="!estado">
+    <div class="fa-4x" >
+        <i class="fas fa-spinner fa-spin"></i>    
+    </div>
+</div>
+<div class="row col-lg-12 mx-auto" *ngIf="estado">    
+    <div class="card col-lg-3 p-0" style="max-height: 662px;">
+        <div class="card-header">
+            <h4 style="color: #EA320B;">Editar Compra</h4>
+        </div>        
+        <div class="card-body">            
+            <div class="form-group">
+                <label for="id" >ID</label>
+                <input type="text" name="id" style="color: black;display: inline-block;" disabled class="form-control" [ngModel]="eCompra.id_ord_comp_cab">
+            </div> 
+            <div class="form-group">
+                <label for="id" >N° orden</label>
+                <input type="text" style="color: black;" disabled class="form-control" [ngModel]="eCompra.num_ord_cab">
+            </div>
+            <div class="form-group">
+                <label for="id" >Proveedor</label>
+                <input type="text" style="color: black;" disabled class="form-control" [ngModel]="eCompra.razon_prov">
+            </div>   
+            <div class="form-group">
+                <label for="id" >Fecha</label>
+                <input type="text" style="color: black;" disabled class="form-control" [ngModel]="eCompra.fecha_ord_cab">
+            </div>  
+            <form [formGroup]="nuevaCompra" class='' (ngSubmit)="actualizar()">                 
+                    <div class="form-group">
+                        <label for="id" >Condicion</label>
+                        <input type="text" [class.is-invalid]="condicionInvalida" class="form-control" placeholder="Condicion de envio" formControlName='cond_env' >
+                        <small *ngIf="condicionInvalida" class="text-danger">
+                            Campo invalido
+                        </small>
+                    </div>                                                                                                 
+                
+                <button class="btn boton-rojo btn-block">
+                    Aceptar
+                </button>                                              
+            </form>   
+
+        </div>
+    </div>
+    <div class="col-lg-8 table-responsive p-0 ml-4 card" >
+        <div class="card-header">
+            <h4 style="color: #EA320B;">Detalle Compra</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover table-bodered" width="100%" cellspacing="0" id="tablaCarrito">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>N°</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Monto</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let prod of listaDetalle;let i = index">
+                        <td>{{i+1}}</td>
+                        <td><img style="border-radius: 0px;height: 50px;width: 50px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{prod.nom_imagen}}" alt=""></td>
+                        <td>{{prod.nom_prod}}</td>
+                        <td><input type="text" (keyup)="aumentar(prod)" maxlength="3" [(ngModel)]="prod.cant_ord_det" class="form-control" value="{{prod.cant_ord_det}}"></td>
+                        <td>{{prod.unit_price_ord_det}}</td>
+                        <td>{{prod.unit_price_ord_det * prod.cant_ord_det}}</td>
+                        <td><a (click)="eliminar(prod.ord_comp_det,prod.nom_prod)" class="btn-floating btn-danger btn-sm"><i class="fas fa-times" style="color: #ccc;"></i></a></td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,65 @@
+<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+  <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+    <a class="navbar-brand brand-logo" routerLink="/menu"><img style="width: 200px;height: 50px;" src="assets/images/logoTrinketV.jpg" alt="logo" /></a>
+    <a class="navbar-brand brand-logo-mini" routerLink="/menu"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+  </div>    
+  <div class="navbar-menu-wrapper d-flex align-items-stretch">
+    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" (click)="toggleSidebar()">
+      <span class="mdi mdi-menu" style="color: #EA320B;"></span>
+    </button>    
+    <ul class="navbar-nav navbar-nav-right">      
+      <li class="nav-item nav-profile dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="carrito" ngbDropdownToggle>
+          <div class="nav-profile-img">
+            <i class="fas fa-shopping-cart" style="color: #EA320B;padding-top: 7px;"></i>
+          </div>          
+        </a>
+        <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="carrito"style="width: 300px;">
+          <div class="dropdown-item" *ngIf="this.compraService.items.length===0" style="cursor:default ;">
+            No hay productos agregados
+          </div> 
+          <div class="dropdown-item" *ngFor="let it of this.compraService.items" style="cursor:default ;height: 100px;">
+            <div class="d-flex justify-content-between">
+              <div class="col-md-3">
+                <img src="http://192.168.1.13:1151/api/producto/verArchivo/{{it.imagen}}" alt="" height="50px" width="50px">            
+              </div>
+              <div class="col-md-4">
+                {{it.nombre_prod}}&nbsp; 
+                <p style="display: block;">S/.{{it.unit_price_ord_det}} x {{it.cant_ord_det}}</p>                
+              </div>
+              <div class="col-md-5 d-flex justify-content-center align-items-center">
+                <i class="far fa-trash-alt" style="color: #EA320B;cursor: pointer;display: block;" (click)="eliminar(it.prod_id)"></i>
+              </div>
+            </div>            
+          </div>                  
+        </div>
+      </li>  
+      
+      <li class="nav-item nav-profile dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>
+          <div class="nav-profile-img">
+            <img src="assets/images/faces/user-rojo.png" alt="image">
+            <span class="availability-status online"></span>
+          </div>
+          <div class="nav-profile-text">
+            <p class="mb-1 text-black">Gian Marco</p>
+          </div>
+        </a>
+        <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown">
+          <a class="dropdown-item" href="javascript:;">                        
+            <i class="fas fa-users-cog mr-2 text-primary"></i>
+            Perfil
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="salir()">
+            <i class="mdi mdi-logout mr-2 text-primary"></i>
+            Salir
+          </a>
+        </div>
+      </li>           
+    </ul>
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggleOffcanvas()">
+      <span class="mdi mdi-menu"></span>
+    </button>
+  </div>
+</nav>

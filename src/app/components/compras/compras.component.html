@@ -1,0 +1,166 @@
+<div class="row h-100 justify-content-center align-items-center" *ngIf="!estado">
+  <div class="fa-4x" >
+      <i class="fas fa-spinner fa-spin"></i>    
+  </div>
+</div>
+  <!--Main layout-->
+  <main *ngIf="estado">
+    <div class="container">   
+      <div class="alert fade show d-flex justify-content-center align-items-center" role="alert" *ngIf="compraService.agregado"
+      style="width: 100%;height: 40px;margin-top: 0px;text-align: center;background: #5cb85c;">
+        <strong>Producto agregado!</strong>     
+      </div>   
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg  mt-3 mb-5" style="background: #EA320B;">
+
+        <!-- Navbar brand -->
+        <span class="navbar-brand" style="color: #ffffff;">Categorias:</span>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars" style="color: #ffffff;"></i>
+        </button>
+
+        <!-- Collapsible content -->
+        
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto" style="color: #ffffff;">
+            <li class="nav-item as">
+              <a class="nav-link" (click)="listarProductos()" [ngClass]="{'seleccionado': seleccionado === 0}">Todos
+              </a>
+            </li> 
+            <li class="nav-item as" [ngClass]="{'seleccionado': seleccionado === c.id_cat}" *ngFor="let c of listaCategoria;let i = index;">
+              <a class="nav-link" *ngIf="i<7" (click)="filtrarXcat(c.id_cat)">{{c.nom_cat}}           
+              </a>
+            </li>  
+            <li class="nav-item nav-profile dropdown" ngbDropdown >
+              <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>                  
+                otros
+              </a>
+              <ul class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown" style="background: #EA320B;">
+                <li [ngClass]="{'seleccionado': seleccionado === c.id_cat}" class="sd" *ngFor="let c of listaCategoria;let i =index">
+                  <a class="dropdown-item" *ngIf="i>=7" (click)="filtrarXcat(c.id_cat)">
+                    {{c.nom_cat}} 
+                  </a>
+                </li>                
+              </ul>              
+            </li>
+          </ul>
+          <!-- Links -->
+
+          <form class="form-inline">
+            <div class="md-form my-0">
+              <input class="form-control mr-sm-2" #texto (keyup)="buscar(texto.value)" type="text" placeholder="Buscar.." aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </nav>
+      <!--/.Navbar-->
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4" *ngFor="let u of listaFiltroTexto">
+
+            <!--Card-->
+            <div class="card " >
+
+              <!--Card image-->
+              <div class="view overlay py-3 px-auto">
+                <div>
+                  <img style="height: 200px;width: 200px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{u.nom_producto}}" 
+                  class="card-img-top mx-auto"
+                  alt="">
+                </div>
+                <a>
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+              <!--Card image-->
+
+              <!--Card content-->
+              <div class="card-body text-center pt-0 pb-3">
+                <!--Category & Title-->
+                <a href="" class="grey-text">
+                  <h5>{{u.nom_cat}}</h5>
+                </a>
+                <h5>
+                  <strong>
+                    <a href="" class="dark-grey-text">{{u.nom_prod}}
+                      <!--<span class="badge badge-pill danger-color">NEW</span>-->
+                    </a>
+                  </strong>
+                </h5>
+
+                <h4 class="font-weight-bold blue-text">
+                  <strong>S/.{{u.precio_unit_prod}}</strong>
+                </h4>
+                <button class="btn btn-outline-primary btn-block px-3" (click)="agregar(u)">Añadir</button>
+
+              </div>
+              <!--Card content-->
+
+            </div>
+            <!--Card-->
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+      </section>
+      <!--Section: Products v.3-->
+
+      <!--Pagination-->
+      <nav class="d-flex justify-content-center wow fadeIn">
+        <ul class="pagination pg-blue">
+
+          <!--Arrow left-->
+          <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+
+          <li class="page-item active">
+            <a class="page-link" href="#">1
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">5</a>
+          </li>
+
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!--Pagination-->
+
+    </div>
+  </main>
+  

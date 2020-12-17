@@ -1,0 +1,40 @@
+<div class="row h-100 justify-content-center align-items-center" *ngIf="!estado">
+    <div class="fa-4x" >
+        <i class="fas fa-spinner fa-spin"></i>    
+    </div>
+</div>
+<div class="table-responsive col-11 container">
+    <table class="table table-bordered table-light table-striped" width="100%" id="tablaCompras">
+        <thead class="thead-dark">
+            <tr>
+                <th>N°</th>
+                <th>Id</th>
+                <th>N° orden</th>
+                <th>Fecha Registro</th>
+                <th>Condicion Envio</th>
+                <th>Proveedor</th>
+                <th>Estado</th>                
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let com of lista;let i = index">
+                <td>{{i+1}}</td>
+                <td>{{com.id_ord_comp_cab}}</td>
+                <td>{{com.num_ord_cab}}</td>
+                <td>{{com.fecha_ord_cab | date : 'dd/MM/yyyy'}} {{com.fecha_ord_cab | date : 'HH:mm:ss'}}</td>
+                <td>{{com.cond_env_cab}}</td>
+                <td>{{com.razon_prov}}</td>
+                <td>
+                    <span *ngIf="+com.est_ord_cab === 1">Por Confirmar</span>
+                    <span *ngIf="+com.est_ord_cab === 2">Confirmado</span>
+                </td>                
+                <td>
+                    <button class="btn-floating btn-outline-warning btn-sm mr-2 mb-2" (click)="editar(com.id_ord_comp_cab)" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button class="btn-floating btn-outline-danger btn-sm mr-2 mb-2" (click)="eliminar(com.id_ord_comp_cab,com.num_ord_cab)"
+                        ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

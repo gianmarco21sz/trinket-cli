@@ -1,0 +1,18 @@
+.boton-rojo:hover{
+    background-color: #EA320B;
+    color: #ffffff;
+}
+.boton-rojo{
+    border: 1px solid #EA320B;
+    color:  #EA320B;    
+}
+.form-control,.custom-select{
+    height: 50px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }

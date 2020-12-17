@@ -1,0 +1,15 @@
+ <div class="row container">
+    <div class='card col-12 col-lg-4 p-4 mb-4 mb-lg-0'style="max-height: 100px;">
+        <button class="btn btn-outline-primary" (click)="agregar()" >Generar Backup</button>        
+    </div>    
+    <div class="col-12 col-lg-6 ml-3" style="overflow: scroll;">
+        <ul class="list-group">
+            <li *ngFor="let p of lista"  class="list-group-item list-group-item-action">                   
+                <h3>{{p.nombre}}</h3>                   
+                <button (click)="restaurar(p)" class="btn btn-outline-success btn-sm">Restaurar</button>                    
+                <button (click)="eliminar(p.id)" class="btn btn-outline-danger btn-sm">Eliminar</button>                                       
+            </li>
+        </ul>  
+    </div>
+</div>
+

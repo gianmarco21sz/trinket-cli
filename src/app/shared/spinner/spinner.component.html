@@ -1,0 +1,14 @@
+<div class="container-scroller">
+  <app-navbar ></app-navbar>
+  <div class="container-fluid page-body-wrapper">
+    <app-sidebar ></app-sidebar>     
+    <!--<div class="main-panel main-panel-only" > -->
+      <div class="content-wrapper"  [ngClass]="{'pt-1' : this.compraService.agregado}">        
+          <router-outlet name='opt' ></router-outlet>
+      </div>      
+      <!-- partial -->
+    <!--</div>-->
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
