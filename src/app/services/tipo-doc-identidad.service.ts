@@ -1,17 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { tipoDocIdentidad } from '../models/tipoDocIdentidad';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoDocIdentidadService {
-  url : string;
+  url : string = environment.uri+'tipoDoc/';
   headers = new HttpHeaders().set('Content-Type','application/json');
 
-  constructor(private http:HttpClient) {
-    this.url = 'http://192.168.1.13:1151/api/tipoDoc/';
+  constructor(private http:HttpClient) {    
   }
 
   listar():Observable<tipoDocIdentidad[]>{

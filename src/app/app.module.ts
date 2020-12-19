@@ -13,7 +13,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { MenuComponent } from './shared/menu/menu.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
 
 import {HttpClientModule} from '@angular/common/http';
@@ -38,6 +38,7 @@ import { UpCompraComponent } from './components/compras/up-compra/up-compra.comp
 import { ListaComprasComponent } from './components/compras/lista-compras/lista-compras.component';
 import { EditComprasComponent } from './components/compras/edit-compras/edit-compras.component';
 import { ListaInvoiceComponent } from './components/compras/lista-invoice/lista-invoice.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { ListaInvoiceComponent } from './components/compras/lista-invoice/lista-
     NavbarComponent,
     SidebarComponent,
     FooterComponent,    
-    SpinnerComponent,
+    MenuComponent,
     ContentAnimateDirective,
     EmpleadoComponent,
     LoginComponent,
@@ -68,7 +69,8 @@ import { ListaInvoiceComponent } from './components/compras/lista-invoice/lista-
     UpCompraComponent,    
     ListaComprasComponent,
     EditComprasComponent,
-    ListaInvoiceComponent
+    ListaInvoiceComponent,
+    VentasComponent
   ],
   imports: [
     BrowserModule,

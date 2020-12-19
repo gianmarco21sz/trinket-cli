@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Proveedor } from '../models/proveedor';
 const listapaises = require('../models/paises.json');
 
@@ -9,7 +10,7 @@ const listapaises = require('../models/paises.json');
   providedIn: 'root'
 })
 export class ProveedorService {
-  url : string = 'http://192.168.1.13:1151/api/proveedor/';
+  url : string = environment.uri+'proveedor/';
   headers = new HttpHeaders().set('Content-Type','application/json');
   constructor(private http:HttpClient) { }
 

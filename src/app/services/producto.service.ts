@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Imagenes } from '../models/imagenes';
 import { Producto } from '../models/producto';
 
@@ -12,7 +13,7 @@ export class ProductoService {
   headers = new HttpHeaders().set('Content-Type','application/json');
 
   constructor(private http:HttpClient) { 
-    this.url = 'http://192.168.1.13:1151/api/producto/';   
+    this.url = environment.uri+'producto/';   
     
   }
 

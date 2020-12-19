@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { backrest } from '../models/backrest';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackrestService {
-  url : string = "http://192.168.1.13:1151/api/backup/";
+  url : string = environment.uri+"backup/";
   headers = new HttpHeaders().set('Content-Type','application/json');
   constructor(private http:HttpClient) { }
 

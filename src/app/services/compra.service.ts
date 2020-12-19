@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Compra } from '../models/compra';
 import { ItemCarro } from '../models/itemCarro';
 
@@ -10,7 +11,7 @@ import { ItemCarro } from '../models/itemCarro';
 export class CompraService {
   items : ItemCarro[] = [];
   headers = new HttpHeaders().set('Content-Type','application/json');  
-  url : string = 'http://192.168.1.13:1151/api/compra/';
+  url : string = environment.uri+'compra/';
   agregado : boolean = false;
   constructor(private http:HttpClient) { 
     if(localStorage.getItem('items')){

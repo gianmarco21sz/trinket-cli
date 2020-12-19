@@ -4,11 +4,11 @@ import { CompraService } from 'src/app/services/compra.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 
 @Component({
-  selector: 'app-spinner',
-  templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.scss']
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss']
 })
-export class SpinnerComponent implements OnInit {
+export class MenuComponent implements OnInit {
 
   constructor(private empleadoService:EmpleadoService,private router:Router,
               public compraService:CompraService) {    

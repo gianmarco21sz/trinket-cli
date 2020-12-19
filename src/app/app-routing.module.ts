@@ -13,7 +13,7 @@ import { ProductoComponent } from './components/producto/producto.component';
 import { UpProductoComponent } from './components/producto/up-producto/up-producto.component';
 import { ProveedorComponent } from './components/proveedor/proveedor.component';
 import { UpProveedorComponent } from './components/proveedor/up-proveedor/up-proveedor.component';
-import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { MenuComponent } from './shared/menu/menu.component';
 import { LoginComponent } from './user-pages/login/login.component';
 import { BackrestComponent } from './components/backrest/backrest.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
@@ -23,12 +23,13 @@ import { UpCompraComponent } from './components/compras/up-compra/up-compra.comp
 import { ListaComprasComponent } from './components/compras/lista-compras/lista-compras.component';
 import { ListaInvoiceComponent } from './components/compras/lista-invoice/lista-invoice.component';
 import { EditComprasComponent } from './components/compras/edit-compras/edit-compras.component';
+import { VentasComponent } from './components/ventas/ventas.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },      
   { path: 'login', component:LoginComponent },  
-  { path: 'menu', component:SpinnerComponent,children:[    
+  { path: 'menu', component:MenuComponent,children:[    
     { path: '',outlet:'opt', component:EmpleadoComponent, pathMatch: 'full'},    
     { path: 'empleado',outlet:'opt', component:EmpleadoComponent},
     { path: 'producto',outlet:'opt', component:ProductoComponent},  
@@ -51,6 +52,7 @@ const routes: Routes = [
     { path: 'listaCompras',outlet:'opt', component: ListaComprasComponent},
     { path: 'listaInvoice',outlet:'opt', component: ListaInvoiceComponent},
     { path: 'upCompra/:id',outlet:'opt', component: EditComprasComponent},
+    { path: 'ventas',outlet:'opt', component: VentasComponent},
     { path: '**',outlet:'opt', component:EmpleadoComponent},
   ] },
   { path: '**', redirectTo: '/menu', pathMatch: 'full' },

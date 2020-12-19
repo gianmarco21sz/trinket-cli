@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Compra } from '../models/compra';
 import { Invoice } from '../models/invoice';
 
@@ -8,7 +9,7 @@ import { Invoice } from '../models/invoice';
   providedIn: 'root'
 })
 export class InvoiceService {
-  url : string = "http://192.168.1.13:1151/api/invoice/";
+  url : string = environment.uri+"invoice/";
   headers = new HttpHeaders().set('Content-Type','application/json');
   constructor(private http:HttpClient) { }
 

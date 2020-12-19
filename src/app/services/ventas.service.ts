@@ -2,20 +2,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Rol } from '../models/rol';
+import { Venta } from '../models/venta';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RolesService {
-  url : string ;
+export class VentasService {
   headers = new HttpHeaders().set('Content-Type','application/json');
-  constructor(private http:HttpClient) { 
-
-    this.url = environment.uri+'rol/';
-  }
-
-  listar():Observable<Rol[]>{
-    return this.http.get<Rol[]>(this.url+'listar',{headers:this.headers});
+  url : string = environment.uri+"venta/";
+  constructor(private http:HttpClient) { }
+  
+  listar():Observable<Venta[]>{
+    return this.http.get<Venta[]>(this.url,{headers:this.headers});
   }
 }

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Empleado } from '../models/empleado';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class EmpleadoService {
   headers = new HttpHeaders().set('Content-Type','application/json');
 
   constructor(private http:HttpClient,private router:Router) { 
-    this.url = 'http://192.168.1.13:1151/api/empleado/';
+    this.url = environment.uri+'empleado/';
     if(localStorage.getItem("empleadolog")){
       this.empleadolog=JSON.parse(localStorage.getItem("empleadolog"));
     }else{
@@ -50,7 +51,7 @@ export class EmpleadoService {
     this.empleadolog=JSON.parse(localStorage.getItem("empleadolog"));
     let expires = new Date;
     //expires.setSeconds(expires.getSeconds()+10);
-    expires.setMinutes(expires.getMinutes()+5);
+    expires.setMinutes(expires.getMinutes()+5000);
     localStorage.setItem("expires",JSON.stringify(expires));        
   }
 

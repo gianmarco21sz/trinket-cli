@@ -2,17 +2,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Categoria } from '../models/categoria';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
-  public url : string;   
+  public url : string = environment.uri+'categoria/'; 
   headers = new HttpHeaders().set('Content-Type','application/json');
 
   constructor(private http:HttpClient) 
   {
-    this.url = 'http://192.168.1.13:1151/api/categoria/';
+    
   }
 
   listar():Observable<Categoria[]>{    

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Cliente } from '../models/cliente';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class ClienteService {
   public url : string;
   headers = new HttpHeaders().set('Content-Type','application/json');
   constructor(private http:HttpClient) { 
-    this.url = 'http://192.168.1.13:1151/api/cliente/';
+    this.url = environment.uri+'cliente/';
   }
 
   listar():Observable<Cliente[]>{
