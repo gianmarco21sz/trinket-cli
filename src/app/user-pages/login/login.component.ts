@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 declare var Swal : any;
@@ -14,13 +14,14 @@ export class LoginComponent implements OnInit {
   forma : FormGroup;
   constructor(private fb:FormBuilder,
               private empleadoService:EmpleadoService,
-              private router:Router) {
-  this.crearFormulario();
-  this.empleadoService.verificarLogin();
+              private router:Router,
+              private route : ActivatedRoute) {
+    this.crearFormulario();
+    this.empleadoService.verificarLogin();       
   }
 
   ngOnInit() {
-  }
+  }  
 
   get emailNoValido() {
     return this.forma.get('email').invalid && this.forma.get('email').touched
@@ -35,6 +36,11 @@ export class LoginComponent implements OnInit {
       email  : ['', [ Validators.required, Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}')] ],
       pass : ['',Validators.required,]
     });
+  }
+
+  voz(mensaje){
+    let vozHablar = new SpeechSynthesisUtterance(mensaje);
+    window.speechSynthesis.speak(vozHablar);
   }
 
   autenticacion(){
@@ -59,7 +65,9 @@ export class LoginComponent implements OnInit {
             confirmButtonText: 'OK',
             allowOutsideClick: false
           }).then((result) => {
-            if (result.isConfirmed) {              
+            if (result.isConfirmed) {    
+              this.voz('Bienvenido '+this.empleadoService.empleadolog.nom_emp
+              +' '+this.empleadoService.empleadolog.ape_emp);  
               this.router.navigateByUrl('/menu/(opt:empleado)');     
             }
           });                   

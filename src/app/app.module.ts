@@ -38,6 +38,9 @@ import { ListaComprasComponent } from './components/compras/lista-compras/lista-
 import { EditComprasComponent } from './components/compras/edit-compras/edit-compras.component';
 import { ListaInvoiceComponent } from './components/compras/lista-invoice/lista-invoice.component';
 import { VentasComponent } from './components/ventas/ventas.component';
+import { RecuperarComponent } from './components/recuperar/recuperar.component';
+import { RestablecerComponent } from './components/restablecer/restablecer.component';
+import { ErrorComponent } from './components/error/error.component';
 
 
 @NgModule({
@@ -68,7 +71,10 @@ import { VentasComponent } from './components/ventas/ventas.component';
     ListaComprasComponent,
     EditComprasComponent,
     ListaInvoiceComponent,
-    VentasComponent
+    VentasComponent,
+    RecuperarComponent,
+    RestablecerComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

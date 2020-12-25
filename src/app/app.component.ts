@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { EmpleadoService } from './services/empleado.service';
+import { UtilsService } from './services/utils.service';
 declare var jQuery:any;
 declare var $:any;
 
@@ -17,11 +18,12 @@ export class AppComponent implements OnInit{
   showFooter: boolean = true;
   isLoading: boolean;
 
-  constructor(private router: Router,public empleadoService:EmpleadoService) {
+  constructor(private router: Router,public empleadoService:EmpleadoService,
+    public utilsService : UtilsService) {
     setInterval(()=>{
       this.empleadoService.expiracion();      
     },5000);
-    this.empleadoService.verificar();
+    
 
   }
 

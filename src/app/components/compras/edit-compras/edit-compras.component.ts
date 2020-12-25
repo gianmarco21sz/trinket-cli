@@ -26,6 +26,7 @@ export class EditComprasComponent implements OnInit {
   aProducto : Producto;
   precio : number;
   cantidad : number;
+  total : number = 0;
   constructor(private compraService:CompraService,
               private fb:FormBuilder,
               private route:ActivatedRoute,
@@ -35,7 +36,7 @@ export class EditComprasComponent implements OnInit {
     this.cargarCompra();    
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
     
   }
 
@@ -72,6 +73,8 @@ export class EditComprasComponent implements OnInit {
       this.compraService.registrarDetalle(lst).subscribe((data:string)=>{      
         this.cargarDetalle(this.eCompra.id_ord_comp_cab);      
         this.listarProductos();
+        this.precio = null;
+        this.cantidad = null;
         $('#cantPrecio .close').click();
         Swal.fire(
           'Añadido',
@@ -179,14 +182,19 @@ export class EditComprasComponent implements OnInit {
     this.compraService.buscarDetalleCompra(id).subscribe((detalle:ItemCarro[])=>{          
       this.listaDetalle = detalle;          
       this.estado = true;
+      this.total = 0;
+      for(let ld of this.listaDetalle){
+        this.total = +this.total + +ld.amount_ord_det;
+      }
     });
   }
 
   soloNumeros(e) {
-    var key = window.event ? e.which : e.keyCode;
-    if (key < 48 || key > 57) {
-        e.preventDefault();
-    }
+    var key = window.event ? e.which : e.keyCode;    
+    if (key < 48 || key > 57 ) {
+      e.preventDefault();
+    }   
+    
   }
 
   volver(){

@@ -7,6 +7,17 @@
   color:#EA320B;
 }
 
+.blocker {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height:100%;
+  width:100%;        /* hacemos que ocupe toda la pantalla a cualquier resolución*/
+  z-index: 50;        /* lo colocamos por encima del resto de componentes*/
+  background: black;
+  opacity: 0.5;
+  }
+
 .navbar {
   font-family: $type1-light;
   background: $navbar-bg;

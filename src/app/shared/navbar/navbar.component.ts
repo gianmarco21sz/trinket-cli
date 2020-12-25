@@ -3,6 +3,7 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ItemCarro } from 'src/app/models/itemCarro';
 import { CompraService } from 'src/app/services/compra.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { UtilsService } from 'src/app/services/utils.service';
 declare var Swal : any;
 
 @Component({
@@ -14,13 +15,21 @@ declare var Swal : any;
 export class NavbarComponent implements OnInit {
   public iconOnlyToggled = false;
   public sidebarToggled = false;  
- 
-  constructor(config: NgbDropdownConfig,private empleadoService:EmpleadoService,
-              public compraService:CompraService) {
+  v : boolean;
+
+  constructor(config: NgbDropdownConfig,public empleadoService:EmpleadoService,
+              public compraService:CompraService,
+              public utilsService:UtilsService) {
     config.placement = 'bottom-right';
+    if(localStorage.getItem('sidebar')){
+      this.v = JSON.parse(localStorage.getItem('sidebar'));
+    }   
+    if(this.v===true){
+      this.toggleSidebar();
+    }
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     
   }
 
@@ -52,17 +61,19 @@ export class NavbarComponent implements OnInit {
   }
 
   // toggle sidebar
-  toggleSidebar() {
+  toggleSidebar() {      
     let body = document.querySelector('body');
-    if((!body.classList.contains('sidebar-toggle-display')) && (!body.classList.contains('sidebar-absolute'))) {
+    if((!body.classList.contains('sidebar-toggle-display')) && (!body.classList.contains('sidebar-absolute'))) {           
       this.iconOnlyToggled = !this.iconOnlyToggled;
       if(this.iconOnlyToggled) {
         body.classList.add('sidebar-icon-only');
+        localStorage.setItem('sidebar',JSON.stringify(true));  
       } else {
         body.classList.remove('sidebar-icon-only');
+        localStorage.setItem('sidebar',JSON.stringify(false));  
       }
-    } else {
-      this.sidebarToggled = !this.sidebarToggled;
+    } else {      
+      this.sidebarToggled = !this.sidebarToggled;      
       if(this.sidebarToggled) {
         body.classList.add('sidebar-hidden');
       } else {

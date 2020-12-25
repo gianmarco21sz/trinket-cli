@@ -22,6 +22,8 @@ export class RegistroCompraComponent implements OnInit {
   proveedores : Proveedor[]=[];
   cajas : number[]=[];  
   precios : number[]=[];  
+  fechaActual = new Date();
+  total : number = 0;
   constructor(public compraService : CompraService,
               private utilsService : UtilsService,
               private fb:FormBuilder,
@@ -38,6 +40,7 @@ export class RegistroCompraComponent implements OnInit {
     this.validar();
     this.crearFormulario();
     this.cargarProveedores();
+    this.cargarTotal();
   }
 
   get condicionInvalida(){
@@ -100,17 +103,27 @@ export class RegistroCompraComponent implements OnInit {
     });          
   }
 
+  cargarTotal(){
+    this.total = 0;
+    for(let it of this.compraService.items){
+      this.total = +this.total + +it.amount_ord_det;
+    }
+  }
+
   aumentar(id:number,indice:number){    
     if(+this.cajas[indice]===0 || +this.cajas[indice]===null){
       this.cajas[indice]=1;
     }
     this.compraService.aumentar(+id,+this.cajas[indice]);
+    this.cargarTotal();
   }
+
   aumentarPrecio(prod:ItemCarro){
     if(+prod.unit_price_ord_det==0 || prod.unit_price_ord_det.toString()==''){
       prod.unit_price_ord_det = 1;
     }
     this.compraService.aumentarPrecio(+prod.prod_id,+prod.unit_price_ord_det);
+    this.cargarTotal();
   }
 
   agregar(){

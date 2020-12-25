@@ -4,10 +4,10 @@ declare var $:any;
 @Injectable({
   providedIn: 'root'
 })
-export class UtilsService {
-  public ubicacion : string = "";
-
-  constructor() { }
+export class UtilsService { 
+  cargaEstado : boolean = false;
+  constructor() {     
+  }  
 
   cargarDataTable(tabla:string){    
     setTimeout(()=>{

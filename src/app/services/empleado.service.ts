@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Empleado } from '../models/empleado';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { CompraService } from './compra.service';
 
 @Injectable({
   providedIn: 'root'
@@ -47,23 +48,39 @@ export class EmpleadoService {
   }
 
   guardarLocal(){
-    localStorage.setItem("empleadolog",JSON.stringify(this.empleadolog));
-    this.empleadolog=JSON.parse(localStorage.getItem("empleadolog"));
-    let expires = new Date;
-    //expires.setSeconds(expires.getSeconds()+10);
-    expires.setMinutes(expires.getMinutes()+5000);
-    localStorage.setItem("expires",JSON.stringify(expires));        
+    if(this.empleadolog !=null){
+      localStorage.setItem("empleadolog",JSON.stringify(this.empleadolog));
+      this.empleadolog=JSON.parse(localStorage.getItem("empleadolog"));
+      let expires = new Date;
+      //expires.setSeconds(expires.getSeconds()+10);
+      expires.setMinutes(expires.getMinutes()+5000);
+      localStorage.setItem("expires",JSON.stringify(expires));
+    }        
   }
 
   cambiar(){
     localStorage.setItem("empleadolog",null);    
     this.empleadolog=JSON.parse(localStorage.getItem("empleadolog"));
     localStorage.removeItem("expires");    
-    this.router.navigate(['login']);
+    localStorage.removeItem("items");    
+    localStorage.removeItem("sidebar");
+    this.router.navigate(['login']);    
   }
 
   enviarCorreoEmp(empleado : Empleado):Observable<string>{
     return this.http.post<string>(this.url+'enviarCorreo',empleado,{headers:this.headers});
+  }
+
+  enviarCorreoRecuperar(correo : string){
+    return this.http.get(this.url+`enviarCorreoRecuperar/${correo}`,{headers:this.headers});
+  }
+
+  buscarPorCodigoRecuperar(codigo : string):Observable<Empleado>{
+    return this.http.get<Empleado>(this.url+`buscarPorCodigoRecuperar/${codigo}`,{headers:this.headers});
+  }
+
+  cambiarPass(correo : string , pass : string){
+    return this.http.get(this.url+`cambiarPass/${correo}/${pass}`,{headers:this.headers});
   }
 
   //CRUD

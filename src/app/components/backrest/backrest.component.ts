@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { backrest } from 'src/app/models/backrest';
 import { BackrestService } from 'src/app/services/backrest.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-backrest',
@@ -14,7 +15,8 @@ export class BackrestComponent implements OnInit {
   lista : backrest[] = [];
   constructor(private backrestService : BackrestService,              
               private empleadoService : EmpleadoService,
-              private router : Router) { }
+              private router : Router,
+              private utilsService : UtilsService) { }
 
   ngOnInit(): void {    
     this.listarBackup();
@@ -23,6 +25,7 @@ export class BackrestComponent implements OnInit {
   
 
   agregar(){
+    this.utilsService.cargaEstado = true;
       let fecha  = new Date().toLocaleString().replace("/","-").replace("/","-").replace(",","").replace(":","").replace(":","").replace(" ","-");      
       let f2 = new Date();
       let nombre = fecha+"-"+f2.getMilliseconds();
@@ -32,7 +35,8 @@ export class BackrestComponent implements OnInit {
         estado : 1
       }
       this.backrestService.agregar(backup).subscribe((data:backrest)=>{
-        this.listarBackup();        
+        this.listarBackup();   
+        this.utilsService.cargaEstado = false;
       });
       
   }
@@ -44,22 +48,23 @@ export class BackrestComponent implements OnInit {
   }
 
   restaurar(backup : backrest){
+    this.utilsService.cargaEstado = true;
     this.backrestService.restaurar(backup).subscribe((data:string)=>{      
-    },err=>{
-      alert("Sistema Restaurado, se cerrar sesion");
+      this.utilsService.cargaEstado = false;      
       this.empleadoService.cambiar();
+      alert("Sistema Restaurado, se cerrar sesion");
       this.router.navigate(['login']);
     });
   }
 
   eliminar(id : number){
+    this.utilsService.cargaEstado = true;
     this.backrestService.eliminar(id).subscribe((data:boolean)=>{
-      if(data===true){
-        alert("eliminado correctamente");
-        this.listarBackup();
-      }else{
-        alert("error al eliminar");
-        this.listarBackup();
+      if(data===true){        
+        setTimeout(()=>{
+          this.utilsService.cargaEstado = false;
+          this.listarBackup(); 
+        },500);
       }
     });
   }

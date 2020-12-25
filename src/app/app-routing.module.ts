@@ -23,11 +23,17 @@ import { ListaComprasComponent } from './components/compras/lista-compras/lista-
 import { ListaInvoiceComponent } from './components/compras/lista-invoice/lista-invoice.component';
 import { EditComprasComponent } from './components/compras/edit-compras/edit-compras.component';
 import { VentasComponent } from './components/ventas/ventas.component';
+import { RecuperarComponent } from './components/recuperar/recuperar.component';
+import { RestablecerComponent } from './components/restablecer/restablecer.component';
+import { ErrorComponent } from './components/error/error.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },      
+  { path: '', redirectTo: '/login', pathMatch: 'full' },  
+  { path: 'reestablecer/:codgen', component:RestablecerComponent },    
+  { path: 'recuperar',component:RecuperarComponent },       
   { path: 'login', component:LoginComponent },  
+  { path: 'error', component:ErrorComponent },  
   { path: 'menu', component:MenuComponent,children:[    
     { path: '',outlet:'opt', component:EmpleadoComponent, pathMatch: 'full'},    
     { path: 'empleado',outlet:'opt', component:EmpleadoComponent},
@@ -62,3 +68,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
