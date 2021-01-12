@@ -93,6 +93,25 @@ export class AddProveedorComponent implements OnInit {
     });    
   }
 
+  soloLetras(e) {
+    let key = e.keyCode || e.which;
+    let tecla = String.fromCharCode(key).toLowerCase();
+    let letras = " �����abcdefghijklmn�opqrstuvwxyz";
+    let especiales: any = "8-37-39-46";
+
+    let tecla_especial = false
+    for (let i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      return false;
+    }
+  }
+
   soloNumeros(e) {
     var key = window.event ? e.which : e.keyCode;
     if (key < 48 || key > 57) {
@@ -179,8 +198,18 @@ export class AddProveedorComponent implements OnInit {
                 'error'
               );
             }else{
-              this.proveedorService.agregar(this.proveedor).subscribe((data:Proveedor)=>{                
-                this.router.navigateByUrl('/menu/(opt:proveedor)');
+              this.proveedorService.validarRazonProv(this.proveedor.razon_prov).subscribe((data:boolean)=>{
+                if(data == true){
+                  Swal.fire(
+                    'Error',
+                    `El proveedor con Razon Social '${this.proveedor.razon_prov}' ya se encuentra registrado`,
+                    'error'
+                  );
+                }else{
+                  this.proveedorService.agregar(this.proveedor).subscribe((data:Proveedor)=>{                
+                    this.router.navigateByUrl('/menu/(opt:proveedor)');
+                  });
+                }
               });
             }
           })

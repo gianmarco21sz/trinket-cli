@@ -37,6 +37,18 @@ export class ProductoService {
     return this.http.delete<boolean>(this.url+id_prod,{headers:this.headers});
   }
 
+  validarDelProducto(id_prod : number):Observable<String[]>{
+    return this.http.get<String[]>(this.url+'validarDelProducto/'+id_prod,{headers:this.headers});
+  }
+
+  validarNombreProducto(nombre : string):Observable<boolean>{
+    return this.http.get<boolean>(this.url+'validarNombreProducto/'+nombre,{headers:this.headers});
+  }
+
+  validarNombreProductoEdit(nombre : string,id : number):Observable<boolean>{
+    return this.http.get<boolean>(this.url+'validarNombreProductoEdit/'+nombre+'/'+id,{headers:this.headers});
+  }
+
   imgXprod(id_prod : number):Observable<Imagenes[]>{
     return this.http.get<Imagenes[]>(this.url+`imgXprod/${id_prod}`,{headers:this.headers});
   }

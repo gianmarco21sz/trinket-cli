@@ -181,6 +181,25 @@ export class EmpleadoFormComponent implements OnInit {
     this.router.navigateByUrl('/menu/(opt:empleado)');
   }
 
+  soloLetras(e) {
+    let key = e.keyCode || e.which;
+    let tecla = String.fromCharCode(key).toLowerCase();
+    let letras = " �����abcdefghijklmn�opqrstuvwxyz";
+    let especiales: any = "8-37-39-46";
+
+    let tecla_especial = false
+    for (let i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      return false;
+    }
+  }
+
   editar(){
     this.llenarEmpleado();
     if ( this.nuevoEmp.invalid ) {      
@@ -213,20 +232,15 @@ export class EmpleadoFormComponent implements OnInit {
             }else{
               this.empleadoService.actualizarEmpleado(this.empleado).subscribe((data:Empleado)=>{                
                 if(+this.empleadoService.empleadolog.id_emp===+data.id_emp){
-                  this.utilsService.cambiar();
-                  Swal.fire({
-                    title: 'Guardando Cambios',
-                    text: "Se cerrara la sesion para guardar los cambios",
-                    icon: 'success',          
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false
-                  }).then((result) => {
-                    if (result.isConfirmed) {    
-                      this.empleadoService.cambiar();
-                      this.utilsService.borrar();
-                      this.router.navigate(['login']);
-                    }
-                  }); 
+                  this.empleadoService.refrescarEmpleado(this.empleado.id_emp).subscribe((emple:Empleado)=>{                    
+                    this.empleadoService.empleadolog = emple; 
+                    this.empleadoService.guardarLocal();
+                  });
+                  Swal.fire(
+                    'Completado',
+                    'Cambios guardados correctamente',
+                    'success'
+                  )
                 }else{
                   this.router.navigateByUrl('/menu/(opt:empleado)');
                 }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchAll } from 'rxjs/operators';
 import { Categoria } from 'src/app/models/categoria';
 import { Producto } from 'src/app/models/producto';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
+declare var Swal : any;
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -17,33 +19,33 @@ interface HtmlInputEvent extends Event {
   styleUrls: ['./add-producto.component.scss']
 })
 export class AddProductoComponent implements OnInit {
-  nuevoProd : FormGroup;
-  producto : Producto;
+  nuevoProd: FormGroup;
+  producto: Producto;
   photoSelected1: string | ArrayBuffer;
   photoSelected2: string | ArrayBuffer;
   photoSelected3: string | ArrayBuffer;
   photoSelected4: string | ArrayBuffer;
-  photoSelected5: string | ArrayBuffer;  
+  photoSelected5: string | ArrayBuffer;
   file1: File;
   file2: File;
   file3: File;
   file4: File;
   file5: File;
-  listaCategorias : Categoria[];
-  estado : boolean = false;
-  
-  constructor(private fb:FormBuilder,    
-              private router:Router,
-              private categoriaService:CategoriaService,
-              private productoService:ProductoService,
-              private empleadoService : EmpleadoService) {
-      this.crearFormulario();
-      this.llenarCategorias();  
-                 
+  listaCategorias: Categoria[];
+  estado: boolean = false;
+
+  constructor(private fb: FormBuilder,
+    private router: Router,
+    private categoriaService: CategoriaService,
+    private productoService: ProductoService,
+    private empleadoService: EmpleadoService) {
+    this.crearFormulario();
+    this.llenarCategorias();
+
   }
 
-  ngOnInit(): void {      
-    if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
+  ngOnInit(): void {
+    if (this.empleadoService.empleadolog.nombre_rol === 'Vendedor') {
       this.router.navigateByUrl('menu/(opt:ventas)');
     }
   }
@@ -62,169 +64,178 @@ export class AddProductoComponent implements OnInit {
   }
   get notaProdNoValido() {
     return this.nuevoProd.get('nota_prod').invalid && this.nuevoProd.get('nota_prod').touched
-  }  
+  }
 
-  llenarCategorias(){
-    this.categoriaService.listar().subscribe((data:Categoria[])=>{
-      this.listaCategorias = data;   
+  llenarCategorias() {
+    this.categoriaService.listar().subscribe((data: Categoria[]) => {
+      this.listaCategorias = data;
       this.nuevoProd.reset({
-        id_cat : data[0].id_cat
+        id_cat: data[0].id_cat
       });
-      this.estado=true; 
+      this.estado = true;
     });
   }
 
   crearFormulario() {
-    this.nuevoProd = this.fb.group({      
-      nom_prod  : ['',  Validators.required ],
-      descrip_prod : ['',Validators.required,],
-      precio_unit_prod : ['',[Validators.required,Validators.max(999999)],],
-      nota_prod : ['',Validators.required,],
-      id_cat : ['',Validators.required,],
+    this.nuevoProd = this.fb.group({
+      nom_prod: ['', Validators.required],
+      descrip_prod: ['', Validators.required,],
+      precio_unit_prod: ['', [Validators.required, Validators.max(999999)],],
+      nota_prod: ['', Validators.required,],
+      id_cat: ['', Validators.required,],
     });
   }
 
-  agregar(){
-    if ( this.nuevoProd.invalid ) {      
-      return Object.values( this.nuevoProd.controls ).forEach( control => {        
-        if ( control instanceof FormGroup ) {
-          Object.values( control.controls ).forEach( control => control.markAsTouched() );          
+  agregar() {
+    this.llenarProducto();
+    if (this.nuevoProd.invalid) {
+      return Object.values(this.nuevoProd.controls).forEach(control => {
+        if (control instanceof FormGroup) {
+          Object.values(control.controls).forEach(control => control.markAsTouched());
         } else {
-          control.markAsTouched();          
-        }          
-      });          
-    }else if(this.file1 === undefined || (this.file2 === undefined
-        && this.file3 === undefined && this.file4 === undefined && this.file5 === undefined)){
+          control.markAsTouched();
+        }
+      });
+    } else if (this.file1 === undefined) {
       alert('Debe colocar una imagen principal');
-      
-    }else{
-      this.llenarProducto();   
-      this.productoService.agregar(this.producto).subscribe((data:Producto)=>{
-        this.productoService.cargarImagen(data.id_prod,this.file1).subscribe(data1=>{
-          this.productoService.cargarImagen(data.id_prod,this.file2).subscribe(data2=>{
-            this.productoService.cargarImagen(data.id_prod,this.file3).subscribe(data3=>{
-              this.productoService.cargarImagen(data.id_prod,this.file4).subscribe(data4=>{
-                this.productoService.cargarImagen(data.id_prod,this.file5).subscribe(data5=>{
-                  this.router.navigateByUrl('/menu/(opt:producto)');
+
+    } else {
+      this.productoService.validarNombreProducto(this.producto.nom_prod).subscribe((data: boolean) => {
+        if (data == true) {
+          Swal.fire(
+            "Error",
+            "Ya existe un producto con ese nombre",
+            "error"
+          )
+        } else {          
+          this.productoService.agregar(this.producto).subscribe((data: Producto) => {
+            this.productoService.cargarImagen(data.id_prod, this.file1).subscribe(data1 => {
+              this.productoService.cargarImagen(data.id_prod, this.file2).subscribe(data2 => {
+                this.productoService.cargarImagen(data.id_prod, this.file3).subscribe(data3 => {
+                  this.productoService.cargarImagen(data.id_prod, this.file4).subscribe(data4 => {
+                    this.productoService.cargarImagen(data.id_prod, this.file5).subscribe(data5 => {
+                      this.router.navigateByUrl('/menu/(opt:producto)');
+                    });
+                  });
                 });
               });
             });
           });
-        });
-      });      
+        }
+      });
     }
   }
 
-  volver(){
+  volver() {
     this.router.navigateByUrl('/menu/(opt:producto)');
   }
 
-  llenarProducto(){
-    this.producto ={
-      id_prod : 0,
-      nom_prod : this.nuevoProd.get('nom_prod').value,
-      descrip_prod : this.nuevoProd.get('descrip_prod').value,
-      precio_unit_prod : this.nuevoProd.get('precio_unit_prod').value,
-      stock_prod : 0,
-      nota_prod : this.nuevoProd.get('nota_prod').value,
-      estado_prod : '1',
-      id_cat : this.nuevoProd.get('id_cat').value        
+  llenarProducto() {
+    this.producto = {
+      id_prod: 0,
+      nom_prod: this.nuevoProd.get('nom_prod').value,
+      descrip_prod: this.nuevoProd.get('descrip_prod').value,
+      precio_unit_prod: this.nuevoProd.get('precio_unit_prod').value,
+      stock_prod: 0,
+      nota_prod: this.nuevoProd.get('nota_prod').value,
+      estado_prod: '1',
+      id_cat: this.nuevoProd.get('id_cat').value
     }
   }
-  
+
   onPhotoSelected1(event: HtmlInputEvent): void {
-    if (event.target.files && event.target.files[0]) {      
-      this.file1 = <File>event.target.files[0];      
-      if(this.file1.name.split('.').pop().toString()==='jpg' || this.file1.name.split('.').pop().toString()==='png'){
-        if(this.file1.size<1000000){
+    if (event.target.files && event.target.files[0]) {
+      this.file1 = <File>event.target.files[0];
+      if (this.file1.name.split('.').pop().toString() === 'jpg' || this.file1.name.split('.').pop().toString() === 'png') {
+        if (this.file1.size < 1000000) {
           // image preview
           const reader = new FileReader();
           reader.onload = e => this.photoSelected1 = reader.result;
           reader.readAsDataURL(this.file1);
-        }else{
+        } else {
           this.file1 = undefined;
           alert('Peso de la imagen no debe exceder 1mb');
-        } 
-      }else{
+        }
+      } else {
         this.file1 = undefined;
         alert('El formato de la imagen debe ser JPG o PNG');
-      }      
+      }
     }
   }
   onPhotoSelected2(event: HtmlInputEvent): void {
     if (event.target.files && event.target.files[0]) {
       this.file2 = <File>event.target.files[0];
-      if(this.file2.name.split('.').pop().toString()==='jpg' || this.file2.name.split('.').pop().toString()==='png'){
-        if(this.file2.size<1000000){
+      if (this.file2.name.split('.').pop().toString() === 'jpg' || this.file2.name.split('.').pop().toString() === 'png') {
+        if (this.file2.size < 1000000) {
           // image preview
           const reader = new FileReader();
           reader.onload = e => this.photoSelected2 = reader.result;
           reader.readAsDataURL(this.file2);
-        }else{
+        } else {
           this.file2 = undefined;
           alert('Peso de la imagen no debe exceder 1mb');
-        } 
-      }else{
+        }
+      } else {
         this.file2 = undefined;
         alert('El formato de la imagen debe ser JPG o PNG');
-      }           
+      }
     }
   }
   onPhotoSelected3(event: HtmlInputEvent): void {
     if (event.target.files && event.target.files[0]) {
       this.file3 = <File>event.target.files[0];
-      if(this.file3.name.split('.').pop().toString()==='jpg' || this.file3.name.split('.').pop().toString()==='png'){
-        if(this.file3.size<1000000){
+      if (this.file3.name.split('.').pop().toString() === 'jpg' || this.file3.name.split('.').pop().toString() === 'png') {
+        if (this.file3.size < 1000000) {
           // image preview
           const reader = new FileReader();
           reader.onload = e => this.photoSelected3 = reader.result;
           reader.readAsDataURL(this.file3);
-        }else{
+        } else {
           alert('Peso de la imagen no debe exceder 1mb');
           this.file3 = undefined;
-        } 
-      }else{
+        }
+      } else {
         this.file3 = undefined;
         alert('El formato de la imagen debe ser JPG o PNG');
-      }    
+      }
     }
   }
   onPhotoSelected4(event: HtmlInputEvent): void {
     if (event.target.files && event.target.files[0]) {
       this.file4 = <File>event.target.files[0];
-      if(this.file4.name.split('.').pop().toString()==='jpg' || this.file4.name.split('.').pop().toString()==='png'){
-        if(this.file4.size<1000000){
+      if (this.file4.name.split('.').pop().toString() === 'jpg' || this.file4.name.split('.').pop().toString() === 'png') {
+        if (this.file4.size < 1000000) {
           // image preview
           const reader = new FileReader();
           reader.onload = e => this.photoSelected4 = reader.result;
           reader.readAsDataURL(this.file4);
-        }else{
+        } else {
           alert('Peso de la imagen no debe exceder 1mb');
           this.file4 = undefined;
-        } 
-      }else{
+        }
+      } else {
         this.file4 = undefined;
         alert('El formato de la imagen debe ser JPG o PNG');
-      }       
+      }
     }
   }
   onPhotoSelected5(event: HtmlInputEvent): void {
     if (event.target.files && event.target.files[0]) {
       this.file5 = <File>event.target.files[0];
-      if(this.file5.name.split('.').pop().toString()==='jpg' || this.file5.name.split('.').pop().toString()==='png'){
-        if(this.file5.size<1000000){
+      if (this.file5.name.split('.').pop().toString() === 'jpg' || this.file5.name.split('.').pop().toString() === 'png') {
+        if (this.file5.size < 1000000) {
           // image preview
           const reader = new FileReader();
           reader.onload = e => this.photoSelected5 = reader.result;
           reader.readAsDataURL(this.file5);
-        }else{
+        } else {
           this.file5 = undefined;
           alert('Peso de la imagen no debe exceder 1mb');
-        } 
-      }else{
+        }
+      } else {
         this.file5 = undefined;
         alert('El formato de la imagen debe ser JPG o PNG');
-      }       
+      }
     }
   }
 

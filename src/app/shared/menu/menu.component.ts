@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CompraService } from 'src/app/services/compra.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
@@ -11,8 +12,10 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 export class MenuComponent implements OnInit {
 
   constructor(private empleadoService:EmpleadoService,private router:Router,
-              public compraService:CompraService) {    
+              public compraService:CompraService,
+              private titleService:Title) {    
     empleadoService.verificar();    
+    this.titleService.setTitle("Trinket Admin")
   } 
 
   ngOnInit() {

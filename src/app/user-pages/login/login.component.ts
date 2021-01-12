@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
@@ -13,13 +14,16 @@ declare var Swal : any;
 })
 export class LoginComponent implements OnInit {
   forma : FormGroup;
+  siteKey : string = "6LcqOCkaAAAAAGkNRmX4mz3IUb4KudQ94Sqp5tBw";
   constructor(private fb:FormBuilder,
               private empleadoService:EmpleadoService,
               private router:Router,
               private route : ActivatedRoute,
-              private utilsService : UtilsService) {
+              private utilsService : UtilsService,
+              private titleService:Title) {
     this.crearFormulario();
-    this.empleadoService.verificarLogin();       
+    this.empleadoService.verificarLogin();   
+    this.titleService.setTitle("Trinket Admin");
   }
 
   ngOnInit() {
@@ -33,10 +37,15 @@ export class LoginComponent implements OnInit {
     return this.forma.get('pass').invalid && this.forma.get('pass').touched
   }
 
+  get captchaNoValido() {
+    return this.forma.get('recaptcha').invalid && this.forma.get('recaptcha').touched
+  }  
+
   crearFormulario() {
     this.forma = this.fb.group({      
       email  : ['', [ Validators.required, Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}')] ],
-      pass : ['',Validators.required,]
+      pass : ['',Validators.required,],
+      recaptcha: ['', Validators.required]
     });
   }
 

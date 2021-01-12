@@ -267,8 +267,7 @@ export class PerfilComponent implements OnInit {
                     'error'
                   );
                 } else {
-                  this.empleadoService.actualizarEmpleado(this.empleado).subscribe((data: Empleado) => {                                       
-                    console.log(data);
+                  this.empleadoService.actualizarEmpleado(this.empleado).subscribe((data: Empleado) => {                    
                     this.empleadoService.refrescarEmpleado(this.empleado.id_emp).subscribe((emple:Empleado)=>{
                       console.log(emple); 
                       this.empleadoService.empleadolog = emple; 

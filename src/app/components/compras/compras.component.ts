@@ -8,6 +8,7 @@ import { CompraService } from 'src/app/services/compra.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { UtilsService } from 'src/app/services/utils.service';
+
 declare var $: any;
 
 @Component({
@@ -113,6 +114,7 @@ export class ComprasComponent implements OnInit {
     this.precio = null;
     this.cantidad = null;
     $('#cantPrecio .close').click();
+    
     setTimeout(() => {
       this.compraService.agregado = false;;
     }, 1000);

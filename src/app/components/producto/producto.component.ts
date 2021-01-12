@@ -36,7 +36,8 @@ export class ProductoComponent implements OnInit {
   cargarLista(){    
     this.productoService.listar().subscribe((data:Producto[])=>{
       this.lista=data; 
-      this.estado = true;            
+      this.estado = true;    
+      console.log(data)        ;
     });     
   }
 
@@ -45,34 +46,44 @@ export class ProductoComponent implements OnInit {
   }
 
   eliminar(id_prod : number,nom_prod : string){
-    Swal.fire({
-      title: 'Confirme acción',
-      text: 'Seguro de eliminar el producto "'+nom_prod+'"?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si',
-      cancelButtonText : 'No'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.productoService.eliminar(id_prod).subscribe((data:boolean)=>{
-          if(data === true){
-            Swal.fire(
-              'Eliminado!',
-              'Producto eliminado satisfactoriamente!',
-              'success'
-            )
-            this.cargarLista();
-          }else{
-            Swal.fire(
-              'Error!',
-              'Se produjo un error al tratar de eliminar el producto',
-              'danger'
-            )
-            this.cargarLista();
+    this.productoService.validarDelProducto(id_prod).subscribe((data:String[])=>{
+      if(data.length==0){
+        Swal.fire({
+          title: 'Confirme acción',
+          text: 'Seguro de eliminar el producto "'+nom_prod+'"?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si',
+          cancelButtonText : 'No'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.productoService.eliminar(id_prod).subscribe((data:boolean)=>{
+              if(data === true){
+                Swal.fire(
+                  'Eliminado!',
+                  'Producto eliminado satisfactoriamente!',
+                  'success'
+                )
+                this.cargarLista();
+              }else{
+                Swal.fire(
+                  'Error!',
+                  'Se produjo un error al tratar de eliminar el producto',
+                  'danger'
+                )
+                this.cargarLista();
+              }
+            });
           }
         });
+      }else{
+        Swal.fire(
+          "Error",
+          "El producto se encuentra en una venta sin confirmar",
+          "error"
+        )
       }
     });
   }

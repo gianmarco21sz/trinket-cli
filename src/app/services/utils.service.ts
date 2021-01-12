@@ -23,9 +23,15 @@ export class UtilsService {
     localStorage.removeItem('pendiente');
   }
 
-  cargarDataTable(tabla:string){    
-    setTimeout(()=>{
+  cargarDataTable(tabla:string){ 
+    $(tabla).DataTable().destroy();  
+    let buscador : boolean=true;
+    if(tabla == "#tablaVentas" || tabla == "#tablaCompras"){
+      buscador = false;
+    }
+    setTimeout(()=>{            
       $(tabla).DataTable({
+        searching : buscador,        
         "language":{
             "sProcessing":     "Procesando...",
             "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -57,6 +63,8 @@ export class UtilsService {
       });      
     },150); 
   }
+
+  
 
   setDefaultPositionModal(id : string){
     $(id).data({

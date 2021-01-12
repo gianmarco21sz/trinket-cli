@@ -82,7 +82,7 @@ export class UpCategoriaComponent implements OnInit {
       });          
     }else{
       this.llenarCategoria();
-      this.categoriaService.validarCategoriaNom(this.categoria.nom_cat)
+      this.categoriaService.validarCategoriaNomEdit(this.categoria.nom_cat,this.categoria.id_cat)
       .subscribe((data:boolean)=>{
         if(data === true){
           Swal.fire(

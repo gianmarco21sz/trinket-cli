@@ -12,6 +12,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 import { MenuComponent } from './shared/menu/menu.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
@@ -52,6 +53,7 @@ import { CliPerfilComponent } from './components-cli/cli-perfil/cli-perfil.compo
 import { CliRecuperarComponent } from './components-cli/cli-recuperar/cli-recuperar.component';
 import { CliReestablecerComponent } from './components-cli/cli-reestablecer/cli-reestablecer.component';
 import { DetComprasComponent } from './components/compras/det-compras/det-compras.component';
+import { PrincipalComponent } from './components-cli/principal/principal.component';
 
 
 @NgModule({
@@ -95,7 +97,8 @@ import { DetComprasComponent } from './components/compras/det-compras/det-compra
     CliPerfilComponent,
     CliRecuperarComponent,
     CliReestablecerComponent,
-    DetComprasComponent
+    DetComprasComponent,
+    PrincipalComponent,    
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,9 @@ import { DetComprasComponent } from './components/compras/det-compras/det-compra
     ReactiveFormsModule,
     ChartsModule,
     HttpClientModule,
-    NgxPaginationModule 
+    NgxPaginationModule,
+    NgxCaptchaModule
+    
   ],
   providers: [ThemeService],
   bootstrap: [AppComponent]

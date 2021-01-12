@@ -5,6 +5,7 @@ import { CompraService } from 'src/app/services/compra.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { UtilsService } from 'src/app/services/utils.service';
 declare var Swal : any;
+declare var $: any;
 
 @Component({
   selector: 'app-lista-compras',
@@ -13,14 +14,17 @@ declare var Swal : any;
 })
 export class ListaComprasComponent implements OnInit {
   lista : Compra[] = [];
+  listaFiltro : Compra[] = [];
+  fecha : Date;
+  actual = new Date();  
+  actualString : string = this.actual.getFullYear()+'-'+this.actual.getMonth()+1+'-'+this.actual.getDate();
   constructor(private compraService:CompraService,
               private utilsService:UtilsService,
               private router:Router,
               public empleadoService : EmpleadoService) { }
   estado : boolean = true;
   ngOnInit(): void {
-    this.listarCompras();
-    this.utilsService.cargarDataTable('#tablaCompras');
+    this.listarCompras();    
     if(this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
       this.router.navigateByUrl('menu/(opt:ventas)');
     }
@@ -29,11 +33,23 @@ export class ListaComprasComponent implements OnInit {
   listarCompras(){
     this.compraService.listarCompras().subscribe((data:Compra[])=>{
       this.lista = data;
+      this.listaFiltro = this.lista;
     });
+    this.utilsService.cargarDataTable('#tablaCompras');
   }
 
   irDetalle(id : number){
     this.router.navigateByUrl(`menu/(opt:detCompra/${id})`);
+  }
+
+  filtraFecha(){    
+    this.listaFiltro = [];
+    for(let com of this.lista){            
+      if(this.fecha.toString() == com.fecha_ord_cab.toString().substring(0,10)){       
+        this.listaFiltro.push(com);
+      }
+    }
+    this.utilsService.cargarDataTable('#tablaCompras');
   }
 
   editar(id:number){

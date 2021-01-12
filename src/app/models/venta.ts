@@ -1,7 +1,7 @@
 export interface Venta{
     est_vent_cab:   string;
     fecha_entr_cab: string;
-    fecha_vent_cab: string;
+    fecha_vent_cab: Date;
     id_cli:         string;
     id_vent_cab:    string;
     nom_cli:        string;

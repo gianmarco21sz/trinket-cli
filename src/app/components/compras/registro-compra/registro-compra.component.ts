@@ -101,6 +101,7 @@ export class RegistroCompraComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.compraService.eliminar(id);
+        this.cargarTotal();
         this.validar();
       }
     });          
@@ -151,7 +152,7 @@ export class RegistroCompraComponent implements OnInit {
         this.compraService.registrarDetalle(this.compraService.items).subscribe((data:string)=>{
           this.compraService.items = [];
           localStorage.setItem("items",JSON.stringify(this.compraService.items));
-          this.router.navigateByUrl('/menu/(opt:compras)');
+          this.router.navigateByUrl('/menu/(opt:listaCompras)');
         });    
       });
     }

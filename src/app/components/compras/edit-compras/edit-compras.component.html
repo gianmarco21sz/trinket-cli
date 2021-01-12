@@ -31,7 +31,8 @@
             <form [formGroup]="nuevaCompra" class='' (ngSubmit)="actualizar()">                 
                     <div class="form-group">
                         <label for="id" >Condicion</label>
-                        <input type="text" [class.is-invalid]="condicionInvalida" class="form-control" placeholder="Condicion de envio" formControlName='cond_env' >
+                        <input type="text" [class.is-invalid]="condicionInvalida" style="color: black;"
+                         class="form-control" disabled="+eCompra.est_ord_cab === 2" placeholder="Condicion de envio" formControlName='cond_env' >
                         <small *ngIf="condicionInvalida" class="text-danger">
                             Campo invalido
                         </small>
@@ -53,25 +54,25 @@
             
         </div>
         <div class="card-body">
-            <table class="table table-hover table-bodered" width="100%" cellspacing="0" id="tablaCarrito">
+            <table class="table table-bodered" width="100%" cellspacing="0" id="tablaCarrito">
                 <thead class="thead-dark">
                     <tr>
-                        <th>N°</th>
-                        <th>Imagen</th>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Monto</th>
-                        <th *ngIf="+eCompra.est_ord_cab != 2">Eliminar</th>
+                        <th style="font-weight: bold;">N°</th>
+                        <th style="font-weight: bold;">Imagen</th>
+                        <th style="font-weight: bold;">Nombre</th>
+                        <th style="font-weight: bold;">Cantidad</th>
+                        <th style="font-weight: bold;">Precio</th>
+                        <th style="font-weight: bold;">Monto</th>
+                        <th style="font-weight: bold;" *ngIf="+eCompra.est_ord_cab != 2">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let prod of listaDetalle;let i = index">
-                        <td>{{i+1}}</td>
+                        <td style="font-weight: bold;">{{i+1}}</td>
                         <td><img style="border-radius: 0px;height: 50px;width: 50px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{prod.nom_imagen}}" alt=""></td>
                         <td>{{prod.nom_prod}}</td>
-                        <td><input type="number" step="any" [disabled]="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentar(prod)"  maxlength="3" [(ngModel)]="prod.cant_ord_det" class="form-control" value="{{prod.cant_ord_det}}"></td>
-                        <td><input type="number" step="any" [disabled]="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentarPrecio(prod)"  maxlength="9" [(ngModel)]="prod.unit_price_ord_det" class="form-control" value="{{prod.unit_price_ord_det}}"></td>
+                        <td><input type="number" step="any" disabled="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentar(prod)"  maxlength="3" [(ngModel)]="prod.cant_ord_det" class="form-control" value="{{prod.cant_ord_det | number:'0.1-5'}}"></td>
+                        <td><input type="number" step="any" disabled="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentarPrecio(prod)"  maxlength="9" [(ngModel)]="prod.unit_price_ord_det" class="form-control" value="{{prod.unit_price_ord_det | number:'0.1-5'}}"></td>
                         <td>{{(prod.unit_price_ord_det * prod.cant_ord_det) | number:'0.1-5'}}</td>
                         <td *ngIf="+eCompra.est_ord_cab != 2"><button (click)="eliminar(prod.ord_comp_det,prod.nom_prod)" class="btn-floating btn-danger btn-sm"><i class="fas fa-times" style="color: #ccc;"></i></button></td>
                     </tr>                    

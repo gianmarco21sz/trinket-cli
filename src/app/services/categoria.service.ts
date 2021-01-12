@@ -32,6 +32,10 @@ export class CategoriaService {
     return this.http.get<boolean>(this.url+`validarCategoriaNom/${nom}`,{headers:this.headers});
   }
 
+  validarCategoriaNomEdit(nom : string,id : number):Observable<boolean>{
+    return this.http.get<boolean>(this.url+`validarCategoriaNomEdit/${nom}/${id}`,{headers:this.headers});
+  }
+
   agregar(categoria : Categoria):Observable<Categoria>{
     return this.http.post<Categoria>(this.url,categoria,{headers:this.headers});
   }

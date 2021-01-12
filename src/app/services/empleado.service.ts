@@ -38,9 +38,9 @@ export class EmpleadoService {
   expiracion(){
     let currentDate = new Date();
     let exp = JSON.parse(localStorage.getItem("expires"));
-    if(Date.parse(currentDate.toString()) >= Date.parse(exp)){
+    if(Date.parse(currentDate.toString()) >= Date.parse(exp)){      
       this.cambiar();
-    }
+    }    
   }
 
   autenticacion(email:string,pass:string):Observable<Empleado>{          
@@ -53,7 +53,7 @@ export class EmpleadoService {
       this.empleadolog=JSON.parse(localStorage.getItem("empleadolog"));
       let expires = new Date;
       //expires.setSeconds(expires.getSeconds()+10);
-      expires.setMinutes(expires.getMinutes()+5000);
+      expires.setMinutes(expires.getMinutes()+5);
       localStorage.setItem("expires",JSON.stringify(expires));
     }        
   }

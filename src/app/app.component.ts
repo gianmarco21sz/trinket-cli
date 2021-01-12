@@ -25,8 +25,7 @@ export class AppComponent implements OnInit{
     }
     setInterval(()=>{
       this.empleadoService.expiracion();      
-    },5000);
-    
+    },5000);    
 
   }
 

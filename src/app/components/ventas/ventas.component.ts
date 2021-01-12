@@ -13,12 +13,15 @@ import { VentasService } from 'src/app/services/ventas.service';
 export class VentasComponent implements OnInit {
   estado : boolean = false;
   lista : Venta[] = [];
+  listaFiltro : Venta[] = [];
+  fecha : Date;
+  actual = new Date();  
+  actualString : string = this.actual.getFullYear()+'-'+this.actual.getMonth()+1+'-'+this.actual.getDate();
   constructor(private ventasService : VentasService,
               private utilsService : UtilsService,
               private empleadoService : EmpleadoService,
               private router : Router) { 
-    this.listarVentas();
-    this.utilsService.cargarDataTable('#tablaVentas');
+    this.listarVentas();    
   }
 
   ngOnInit(): void {
@@ -27,11 +30,23 @@ export class VentasComponent implements OnInit {
     }
   }
 
+  filtraFecha(){    
+    this.listaFiltro = [];
+    for(let com of this.lista){            
+      if(this.fecha.toString() == com.fecha_vent_cab.toString().substring(0,10)){       
+        this.listaFiltro.push(com);
+      }
+    }    
+    this.utilsService.cargarDataTable('#tablaVentas');    
+  }
+
   listarVentas(){
     this.ventasService.listar().subscribe((data:Venta[])=>{
       this.lista = data;
+      this.listaFiltro = this.lista;
       this.estado = true;
     });
+    this.utilsService.cargarDataTable('#tablaVentas');
   }
 
 }

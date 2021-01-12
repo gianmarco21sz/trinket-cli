@@ -52,7 +52,7 @@ export class ClienteService {
       this.clientelog=JSON.parse(localStorage.getItem("clientelog"));
       let expires = new Date;
       //expires.setSeconds(expires.getSeconds()+10);
-      expires.setMinutes(expires.getMinutes()+5000);
+      expires.setMinutes(expires.getMinutes()+5);
       localStorage.setItem("expires",JSON.stringify(expires));
     }        
   }

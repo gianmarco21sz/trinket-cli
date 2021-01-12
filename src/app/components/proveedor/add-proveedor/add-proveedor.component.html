@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Contacto Proveedor</label>
-                        <input class="form-control" [class.is-invalid]="contactoNoValido" placeholder="Contacto" formControlName='contact_prov'>
+                        <input (keypress)="soloLetras($event)" class="form-control" [class.is-invalid]="contactoNoValido" placeholder="Contacto" formControlName='contact_prov'>
                         <small *ngIf="contactoNoValido" class="text-danger">
                             Campo invalido
                           </small>

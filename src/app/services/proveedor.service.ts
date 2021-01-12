@@ -34,6 +34,14 @@ export class ProveedorService {
     return this.http.put<Proveedor>(this.url+proveedor.id_prov,proveedor,{headers:this.headers});
   }
 
+  validarRazonProv(nombre : string):Observable<boolean>{
+    return this.http.get<boolean>(this.url+'validarRazonProv/'+nombre,{headers:this.headers});
+  }
+
+  validarRazonProvEdit(nombre : string,id : number):Observable<boolean>{
+    return this.http.get<boolean>(this.url+'validarRazonProvEdit/'+nombre+'/'+id,{headers:this.headers});
+  }
+
   validarDocProv(num_doc : string):Observable<boolean>{
     return this.http.get<boolean>(this.url+`validarDoc/${num_doc}`,{headers:this.headers})
   }

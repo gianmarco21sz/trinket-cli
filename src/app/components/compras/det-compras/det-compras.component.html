@@ -13,17 +13,17 @@
             <table class="table table-hover table-bodered" width="100%" cellspacing="0" id="tablaCarrito">
                 <thead class="thead-dark">
                     <tr>
-                        <th>N°</th>
-                        <th>Imagen</th>
-                        <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Monto</th>                        
+                        <th style="font-weight: bold;">N°</th>
+                        <th style="font-weight: bold;">Imagen</th>
+                        <th style="font-weight: bold;">Nombre</th>
+                        <th style="font-weight: bold;">Cantidad</th>
+                        <th style="font-weight: bold;">Precio</th>
+                        <th style="font-weight: bold;">Monto</th>                        
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let prod of listaDetalle;let i = index">
-                        <td>{{i+1}}</td>
+                        <td style="font-weight: bold;">{{i+1}}</td>
                         <td><img style="border-radius: 0px;height: 50px;width: 50px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{prod.nom_imagen}}" alt=""></td>
                         <td>{{prod.nom_prod}}</td>
                         <td>{{prod.cant_ord_det}}</td>

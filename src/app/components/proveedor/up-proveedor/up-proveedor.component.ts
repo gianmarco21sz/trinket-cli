@@ -43,6 +43,25 @@ export class UpProveedorComponent implements OnInit {
     this.router.navigateByUrl('/menu/(opt:proveedor)');
   }
 
+  soloLetras(e) {
+    let key = e.keyCode || e.which;
+    let tecla = String.fromCharCode(key).toLowerCase();
+    let letras = " �����abcdefghijklmn�opqrstuvwxyz";
+    let especiales: any = "8-37-39-46";
+
+    let tecla_especial = false
+    for (let i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      return false;
+    }
+  }
+
   cargarProveedor(){
     let params = this.route.snapshot.params;
     if(params){
@@ -145,7 +164,7 @@ export class UpProveedorComponent implements OnInit {
 
   llenarProveedor(){
     if(this.rod){
-      this.nuevoProv.get('num_doc_ruc').setValue("123456789147");
+      this.nuevoProv.get('num_doc_ruc').setValue("12345678914");
       this.proveedor ={
         id_prov:       this.proveedor.id_prov,
         tip_id:        this.nuevoProv.get('tip_id').value,
@@ -207,9 +226,20 @@ export class UpProveedorComponent implements OnInit {
                 'error'
               );
             }else{
-              this.proveedorService.actualizar(this.proveedor).subscribe((data:Proveedor)=>{                
-                this.router.navigateByUrl('/menu/(opt:proveedor)');
-              });
+              this.proveedorService.validarRazonProvEdit(this.proveedor.razon_prov,this.proveedor.id_prov)
+              .subscribe((data:boolean)=>{
+                if(data == true){
+                  Swal.fire(
+                    'Error',
+                    `El proveedor con Razon Social '${this.proveedor.razon_prov}' ya se encuentra registrado`,
+                    'error'
+                  );
+                }else{
+                  this.proveedorService.actualizar(this.proveedor).subscribe((data:Proveedor)=>{                
+                    this.router.navigateByUrl('/menu/(opt:proveedor)');
+                  });
+                }
+              });              
             }
           })
         }

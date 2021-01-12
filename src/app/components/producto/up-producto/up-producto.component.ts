@@ -142,6 +142,7 @@ export class UpProductoComponent implements OnInit {
   }
 
   actualizar(){
+    this.llenarProducto();   
     if ( this.nuevoProd.invalid ) {      
       return Object.values( this.nuevoProd.controls ).forEach( control => {        
         if ( control instanceof FormGroup ) {
@@ -150,19 +151,28 @@ export class UpProductoComponent implements OnInit {
           control.markAsTouched();          
         }          
       });          
-    }else{
-      this.llenarProducto();    
-       
-      this.productoService.actualizar(this.producto).subscribe((data:Producto)=>{               
-        this.productoService.actualizarImagen(this.imagenesArr[0].id_imagen,this.file1).subscribe(data=>{},err=>{});
-        this.productoService.actualizarImagen(this.imagenesArr[1].id_imagen,this.file2).subscribe(data=>{},err=>{});
-        this.productoService.actualizarImagen(this.imagenesArr[2].id_imagen,this.file3).subscribe(data=>{},err=>{});
-        this.productoService.actualizarImagen(this.imagenesArr[3].id_imagen,this.file4).subscribe(data=>{},err=>{});
-        this.productoService.actualizarImagen(this.imagenesArr[4].id_imagen,this.file5)
-        .subscribe((data)=>{          
-          this.router.navigateByUrl('/menu/(opt:producto)');          
-        },
-          err=>{});
+    }else{       
+      this.productoService.validarNombreProductoEdit(this.producto.nom_prod,this.producto.id_prod)
+      .subscribe((data:boolean)=>{
+        if(data == true){
+          Swal.fire(
+            "Error",
+            "Ya existe un producto con ese nombre",
+            "error"
+          )
+        }else{
+          this.productoService.actualizar(this.producto).subscribe((data:Producto)=>{               
+            this.productoService.actualizarImagen(this.imagenesArr[0].id_imagen,this.file1).subscribe(data=>{},err=>{});
+            this.productoService.actualizarImagen(this.imagenesArr[1].id_imagen,this.file2).subscribe(data=>{},err=>{});
+            this.productoService.actualizarImagen(this.imagenesArr[2].id_imagen,this.file3).subscribe(data=>{},err=>{});
+            this.productoService.actualizarImagen(this.imagenesArr[3].id_imagen,this.file4).subscribe(data=>{},err=>{});
+            this.productoService.actualizarImagen(this.imagenesArr[4].id_imagen,this.file5)
+            .subscribe((data)=>{          
+              this.router.navigateByUrl('/menu/(opt:producto)');          
+            },
+              err=>{});
+          });
+        }
       });
     }
   }
