@@ -1,0 +1,54 @@
+  <div class="row">
+    <div class="col-md-4 stretch-card grid-margin">
+      <div class="card bg-gradient-danger card-img-holder text-white">
+        <div class="card-body">
+          <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+          <h4 class="font-weight-normal mb-3">Ventas Realizadas
+            <i class="fas fa-shopping-cart fa-2x float-right"></i>
+          </h4>
+          <h2 class="mb-5">{{ventas}}</h2>          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+      <div class="card bg-gradient-primary card-img-holder text-white">
+        <div class="card-body">
+          <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
+          <h4 class="font-weight-normal mb-3">Ingresos del mes
+            <i class="fas fa-money-check-alt fa-2x float-right"></i>            
+          </h4>
+          <h2 class="mb-5">S/. {{ingresos}}</h2>          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 stretch-card grid-margin">
+      <div class="card bg-gradient-success card-img-holder text-white">
+        <div class="card-body">
+          <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                                    
+          <h4 class="font-weight-normal mb-3">Cliente Registrados
+            <i class="fas fa-users fa-2x float-right"></i>
+          </h4>
+          <h2 class="mb-5">{{clientes}}</h2>          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">    
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Ventas por mes</h4>
+          <canvas baseChart [chartType]="'bar'" [datasets]="barChartDataVentas" [labels]="barChartLabelsVentas" [options]="barChartOptions" [colors]="barChartColors"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Productos mas vendidos</h4>
+          <canvas baseChart [chartType]="'horizontalBar'" [datasets]="barChartDataProductos" [labels]="barChartLabelsProductos" [options]="barChartOptions" [colors]="barChartColors"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  

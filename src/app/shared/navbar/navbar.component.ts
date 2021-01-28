@@ -35,6 +35,10 @@ export class NavbarComponent implements OnInit {
     
   }
 
+  reportes(){
+    this.router.navigateByUrl("menu/(opt:reportes)");
+  }
+
   eliminar(id : number,imagen : string,producto :string){    
     Swal.fire({
       title: 'Confirme acción',

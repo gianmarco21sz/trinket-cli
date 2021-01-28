@@ -134,7 +134,7 @@ export class OrdenVentaComponent implements OnInit {
                               });
                             Swal.fire(
                               "Pedido Realizado",
-                              "El pedido se realizo correctamente, revise su correo.",
+                              "El pedido se realizo correctamente.",
                               "success"
                             )
                             this.router.navigateByUrl('catalogo');

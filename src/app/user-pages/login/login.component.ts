@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
                 /*this.voz('Bienvenido '+this.empleadoService.empleadolog.nom_emp
                 +' '+this.empleadoService.empleadolog.ape_emp);  */
                 if(this.empleadoService.empleadolog.nombre_rol === 'Administrador'){
-                  this.router.navigateByUrl('/menu/(opt:empleado)');
+                  this.router.navigateByUrl('/menu/(opt:reportes)');
                 }else if (this.empleadoService.empleadolog.nombre_rol === 'Vendedor'){
                   this.router.navigateByUrl('/menu/(opt:ventas)');
                 }else if (this.empleadoService.empleadolog.nombre_rol === 'Comprador'){

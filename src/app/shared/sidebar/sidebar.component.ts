@@ -37,6 +37,10 @@ export class SidebarComponent implements OnInit {
     });
   }
 
+  perfil(){
+    this.router.navigateByUrl("menu/(opt:perfil)");
+  }
+
   irCompras(){
     if(this.compraService.items.length>0){
       this.router.navigateByUrl('/menu/(opt:addCompra)');

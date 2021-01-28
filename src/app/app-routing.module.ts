@@ -39,6 +39,7 @@ import { DetComprasComponent } from './components/compras/det-compras/det-compra
 import { PrincipalComponent } from './components-cli/principal/principal.component';
 import { OrdenVentaComponent } from './components-cli/orden-venta/orden-venta.component';
 import { ErrorCliComponent } from './components-cli/error-cli/error-cli.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,7 @@ const routes: Routes = [
   { path: 'menu', component:MenuComponent,children:[    
     { path: '',outlet:'opt', component:EmpleadoComponent, pathMatch: 'full'},    
     { path: 'empleado',outlet:'opt', component:EmpleadoComponent},
+    { path: 'reportes',outlet:'opt', component:ReportesComponent},
     { path: 'producto',outlet:'opt', component:ProductoComponent},  
     { path: 'addProducto',outlet:'opt', component:AddProductoComponent},
     { path: 'upProducto/:id_prod',outlet:'opt', component:UpProductoComponent},

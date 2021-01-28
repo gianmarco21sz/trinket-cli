@@ -59,6 +59,7 @@ import { ErrorCliComponent } from './components-cli/error-cli/error-cli.componen
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReportesComponent } from './components/reportes/reportes.component';
 
 
 @NgModule({
@@ -105,7 +106,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     DetComprasComponent,
     PrincipalComponent,
     OrdenVentaComponent,
-    ErrorCliComponent,  
+    ErrorCliComponent,
+    ReportesComponent,  
     
   ],
   imports: [

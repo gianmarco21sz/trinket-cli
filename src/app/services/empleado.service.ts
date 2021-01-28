@@ -53,7 +53,7 @@ export class EmpleadoService {
       this.empleadolog=JSON.parse(localStorage.getItem("empleadolog"));
       let expires = new Date;
       //expires.setSeconds(expires.getSeconds()+10);
-      expires.setMinutes(expires.getMinutes()+5);
+      expires.setMinutes(expires.getMinutes()+50000);
       localStorage.setItem("expires",JSON.stringify(expires));
     }        
   }
