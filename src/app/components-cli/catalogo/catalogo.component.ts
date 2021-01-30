@@ -276,8 +276,8 @@ export class CatalogoComponent implements OnInit {
   crearFormularioRegistro() {
     this.formaR = this.fb.group({
       tipo_doc: ['', [Validators.required]],
-      num_doc_ruc: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(11), Validators.maxLength(11)],],
-      num_doc_dni: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(8), Validators.maxLength(8)],],
+      num_doc_ruc: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]\d*)?$/), Validators.minLength(11), Validators.maxLength(11)],],
+      num_doc_dni: ['', [Validators.required, Validators.pattern(/^-?(0|[0-9]\d*)?$/), Validators.minLength(8), Validators.maxLength(8)],],
       correo: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}')]],
       distrito: ['', [Validators.required]],
       zona: ['', [Validators.required]],

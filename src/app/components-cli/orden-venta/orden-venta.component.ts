@@ -37,8 +37,7 @@ export class OrdenVentaComponent implements OnInit {
   ngOnInit(): void {
     this.cargarCombos();
     this.cargarCarrito();
-    this.crearFormulario();
-    this.cargar();
+    this.crearFormulario();    
   }
 
   get medioInvalido() {
@@ -53,10 +52,11 @@ export class OrdenVentaComponent implements OnInit {
 
   cargarCombos() {
     this.medioPagoService.listar().subscribe((data: MedioPago[]) => {
-      this.medio = data;
+      this.medio = data;      
     });
     this.tipoPagoService.listar().subscribe((data: TipoPago[]) => {
       this.tipo = data;
+      this.cargar();
     });
   }
 
@@ -153,7 +153,8 @@ export class OrdenVentaComponent implements OnInit {
   cargar() {
     this.forma.reset({
       nombre: this.clienteService.clientelog.nom_cli,
-      direccion: this.clienteService.clientelog.direcc_cli
+      direccion: this.clienteService.clientelog.direcc_cli,
+      tipo: 1
     });
   }
 

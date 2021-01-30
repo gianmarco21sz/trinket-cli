@@ -33,7 +33,7 @@
                         
                         <div class="form-group pl-0 mb-3">
                             <label for="">Tipo Documento Pago</label>
-                            <select [class.is-invalid]="tipoInvalido" formControlName="tipo" class="custom-select">
+                            <select disabled [class.is-invalid]="tipoInvalido" formControlName="tipo" class="custom-select">
                                 <option *ngFor="let item of tipo" value="{{item.id_pag}}">{{item.descrip_pag}}</option>
                             </select>
                         </div>

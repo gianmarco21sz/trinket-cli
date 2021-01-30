@@ -35,7 +35,10 @@
 
                     <p *ngIf="producto">{{producto.descrip_prod}}.</p>
 
-                    <form class="d-flex justify-content-left">
+                    <form class="d-flex justify-content-left align-items-center">
+                        <label for="">
+                            Stock: 
+                        </label>&nbsp;
                         <!-- Default input -->
                         <input *ngIf="producto" type="number" disabled value="1" value="{{producto.stock_prod}}"
                             aria-label="Search" class="form-control" style="width: 100px;color: black;">

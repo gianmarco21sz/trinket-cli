@@ -31,7 +31,7 @@ export class EmpleadoService {
 
   verificarLogin(){
     if(this.empleadolog){
-      this.router.navigateByUrl('/menu/(opt:empleado)');
+      this.router.navigateByUrl('/menu/(opt:reportes)');
     }
   }
 

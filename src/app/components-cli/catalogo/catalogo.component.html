@@ -194,6 +194,7 @@
                 <div class="mb-3" *ngIf="rod">
                   <label style="display: block;">N° Documento:</label>
                   <input type="text" (keypress)="soloNumeros($event)" [class.is-invalid]="dniNoValido"
+                    [maxlength]="8"
                     formControlName="num_doc_dni" class="form-control" placeholder="N° Documento">
                   <small *ngIf="dniNoValido" class="text-danger">
                     Campo invalido
