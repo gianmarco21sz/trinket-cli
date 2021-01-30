@@ -361,7 +361,9 @@ export class CatalogoComponent implements OnInit {
   }
 
   limpiar() {
-    this.formaR.reset();
+    this.formaR.reset({
+      tipo_doc:1
+    });
     this.isblock = true;
   }
 

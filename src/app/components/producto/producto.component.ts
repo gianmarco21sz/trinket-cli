@@ -34,8 +34,7 @@ export class ProductoComponent implements OnInit {
   cargarLista(){    
     this.productoService.listar().subscribe((data:Producto[])=>{
       this.lista=data; 
-      this.estado = true;    
-      console.log(data)        ;
+      this.estado = true;              
     });     
   }
 

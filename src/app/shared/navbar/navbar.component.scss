@@ -7,6 +7,14 @@
   color:#EA320B;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbarra{  
+  overflow: scroll;
+}
+
 .blocker {
   position: absolute;
   top: 0px;

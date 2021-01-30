@@ -35,6 +35,10 @@ export class PedidoComponent implements OnInit {
       });
   }
 
+  irProducto(codigo:number){
+    this.router.navigateByUrl(`catalogo/(cli:detProducto/${codigo})`);
+  }
+
   soloNumeros(e) {
     var key = window.event ? e.which : e.keyCode;
     if (key < 48 || key > 57) {

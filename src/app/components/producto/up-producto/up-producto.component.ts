@@ -86,7 +86,7 @@ export class UpProductoComponent implements OnInit {
 
   cargarProducto(){
     this.route.paramMap.subscribe( params => {      
-      this.productoService.buscar(+params.get('id_prod')).subscribe((data:Producto)=>{        
+      this.productoService.buscar(+params.get('id_prod')).subscribe((data:Producto)=>{          
         this.producto = data;        
         this.nuevoProd.reset({
           descrip_prod : this.producto.descrip_prod,

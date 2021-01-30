@@ -10,6 +10,10 @@
 @import "./assets/scss/fonts";
 @import "./assets/scss/functions";
 
+/*::-webkit-scrollbar {
+    display: none;
+  }*/
+
 /* === Icon fonts === */
 @import "~@mdi/font/scss/materialdesignicons";
 

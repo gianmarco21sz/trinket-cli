@@ -53,7 +53,7 @@
 
           <form class="form-inline">
             <div class="md-form my-0">
-              <input class="form-control mr-sm-2" [(ngModel)]="texto" [ngModelOptions]="{standalone: true}" (keyup)="buscar()" type="text" placeholder="Buscar.." aria-label="Search">
+              <input style="color:white" class="form-control mr-sm-2" [(ngModel)]="texto" [ngModelOptions]="{standalone: true}" (keyup)="buscar()" type="text" placeholder="Buscar.." aria-label="Search">
             </div>
           </form>
         </div>
@@ -100,6 +100,7 @@
                 </h5> 
                 <a href="" class="grey-text">
                   <h5>Stock :{{u.stock_prod}}</h5>
+                  <h5>Precio :{{u.precio_unit_prod}}</h5>
                 </a>   
                 <button type="button" class="btn btn-outline-primary btn-block px-3" data-bs-toggle="modal" 
                     data-bs-target="#cantPrecio" (click)="agregar(u)" data-bs-whatever="@getbootstrap">

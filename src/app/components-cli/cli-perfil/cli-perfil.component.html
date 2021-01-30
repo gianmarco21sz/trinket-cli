@@ -35,7 +35,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="">Tipo Documento:</label>
-                    <select class='custom-select' [class.is-invalid]="tipoNoValido" (change)="cambiar()"
+                    <select disabled class='custom-select' [class.is-invalid]="tipoNoValido" (change)="cambiar()"
                       formControlName='tipo_doc'>
                       <option *ngFor='let c of listaTipoDoc' value="{{c.id_tip}}">{{c.descrip_tip}}</option>
                     </select>

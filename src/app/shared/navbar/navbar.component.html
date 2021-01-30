@@ -17,17 +17,17 @@
             <i class="fas fa-shopping-cart" style="color: #EA320B;padding-top: 7px;"></i>
           </div>          
         </a>
-        <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="carrito"style="width: 300px;">
+        <div class="dropdown-menu navbar-dropdown scrollbarra" ngbDropdownMenu aria-labelledby="carrito"style="width: 300px;max-height:500px;">
           <div class="dropdown-item" *ngIf="this.compraService.items.length===0" style="cursor:default ;">
             No hay productos agregados
           </div> 
-          <div class="dropdown-item" *ngFor="let it of this.compraService.items" style="cursor:default ;height: 100px;">
+          <div class="dropdown-item"  *ngFor="let it of this.compraService.items" style="cursor:default ;height: 100px;">
             <div class="d-flex justify-content-between">
               <div class="col-md-3">
                 <img src="http://192.168.1.13:1151/api/producto/verArchivo/{{it.imagen}}" alt="" height="50px" width="50px">            
               </div>
               <div class="col-md-5">
-                {{it.nombre_prod}}&nbsp; 
+                {{it.nombre_prod.toString().substr(0,9)+'...'}}&nbsp; 
                 <p style="display: block;">S/.{{it.unit_price_ord_det}} x {{it.cant_ord_det}}</p>                
               </div>
               <div class="col-md-3 d-flex justify-content-center align-items-center" style="cursor: pointer;display: block;" (click)="eliminar(it.prod_id,it.imagen,it.nombre_prod)">

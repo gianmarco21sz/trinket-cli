@@ -107,7 +107,7 @@
                     </div>
                     <div class="mb-3">
                       <label style="display: block;" for="recipient-name" class="col-form-label">Contraseña:</label>
-                      <div class="input-group" style="height: 50px;">
+                      <div class="input-group" style="height: 40px;">
                         <input [class.is-invalid]="passNoValido" placeholder="************" (keyup.enter)="login()" [type]="isblock ? 'password' : 'text'"
                           class="form-control pl-3 m-0" formControlName="pass">
                         <div class="input-group-prepend" (click)="ocultar(1)">
@@ -182,7 +182,8 @@
                 </div>
                 <div class="mb-3">
                   <label for="">Tipo Documento:</label>
-                  <select class='custom-select' [class.is-invalid]="tipoNoValido" (change)="cambiar()"
+                  <select disabled class='custom-select' [class.is-invalid]="tipoNoValido" (change)="cambiar()"
+                  value="1"
                     formControlName='tipo_doc'>
                     <option *ngFor='let c of listaTipoDoc' value="{{c.id_tip}}">{{c.descrip_tip}}</option>
                   </select>

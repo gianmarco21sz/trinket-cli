@@ -134,9 +134,9 @@ export class EmpleadoFormComponent implements OnInit {
       nom_user : ['',[Validators.required],],
       ape_user : ['',Validators.required,],
       id_tip : [0,Validators.required,],
-      num_dni : ['',[Validators.required,Validators.pattern(/^-?(0|[1-9]\d*)?$/),Validators.minLength(8),Validators.maxLength(8)],],      
+      num_dni : ['',[Validators.required,Validators.pattern(/^-?(0|[0-9]\d*)?$/),Validators.minLength(8),Validators.maxLength(8)],],      
       direcc_user  : ['',  Validators.required ],
-      telefono_user : ['',[Validators.required,Validators.pattern(/^-?(0|[1-9]\d*)?$/),Validators.minLength(9),Validators.maxLength(9)],],
+      telefono_user : ['',[Validators.required,Validators.pattern(/^-?(0|[0-9]\d*)?$/),Validators.minLength(9),Validators.maxLength(9)],],
       email  : ['', [ Validators.required, Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}')] ],
       id_rol : ['',Validators.required,],
     });    
@@ -241,7 +241,13 @@ export class EmpleadoFormComponent implements OnInit {
                     'Cambios guardados correctamente',
                     'success'
                   )
+                  this.router.navigateByUrl('/menu/(opt:empleado)');
                 }else{
+                  Swal.fire(
+                    'Completado',
+                    'Cambios guardados correctamente',
+                    'success'
+                  )
                   this.router.navigateByUrl('/menu/(opt:empleado)');
                 }
                 
@@ -284,14 +290,14 @@ export class EmpleadoFormComponent implements OnInit {
               );
             }else{
               this.empleadoService.agregarEmpleado(this.empleado).subscribe((data:Empleado)=>{
-                this.empleadoService.enviarCorreoEmp(data).subscribe((data:string)=>{
-                  Swal.fire(
-                    'Agregado',
-                    'Empleado agregado correctamente',
-                    'success'
-                  )                  
-                  this.router.navigateByUrl('/menu/(opt:empleado)');
-                });                
+                this.empleadoService.enviarCorreoEmp(data).subscribe((data:string)=>{                  
+                });        
+                Swal.fire(
+                  'Agregado',
+                  'Empleado agregado correctamente',
+                  'success'
+                )                  
+                this.router.navigateByUrl('/menu/(opt:empleado)');        
               });
             }
           })
