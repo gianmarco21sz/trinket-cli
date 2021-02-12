@@ -59,7 +59,7 @@ export class CatalogoComponent implements OnInit {
     this.titleService.setTitle("Trinket Cloud Sales");
     setInterval(() => {
       this.clienteService.expiracion();
-    }, 5000);
+    }, 500);
     if(this.clienteService.clientelog){
       this.cargarCarrito();
     }

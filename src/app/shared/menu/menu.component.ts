@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit {
     this.titleService.setTitle("Trinket Admin")
     setInterval(()=>{
       this.empleadoService.expiracion();      
-    },5000); 
+    },500); 
   } 
 
   ngOnInit() {
