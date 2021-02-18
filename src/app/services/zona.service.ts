@@ -16,4 +16,5 @@ export class ZonaService {
   listar():Observable<Zona[]>{
     return this.http.get<Zona[]>(this.url,{headers:this.headers});
   }
+  
 }

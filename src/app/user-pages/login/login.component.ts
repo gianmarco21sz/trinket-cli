@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { ZonaService } from 'src/app/services/zona.service';
 declare var Swal : any;
 
 @Component({
@@ -19,14 +20,14 @@ export class LoginComponent implements OnInit {
               private empleadoService:EmpleadoService,
               private router:Router,
               private route : ActivatedRoute,
-              private utilsService : UtilsService,
+              private utilsService : UtilsService,              
               private titleService:Title) {
     this.crearFormulario();
     this.empleadoService.verificarLogin();   
     this.titleService.setTitle("Trinket Admin");
   }
 
-  ngOnInit() {
+  ngOnInit() {    
   }  
 
   get emailNoValido() {

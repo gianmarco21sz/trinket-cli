@@ -4,6 +4,7 @@ import { Producto } from 'src/app/models/producto';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { environment } from 'src/environments/environment';
 declare var Swal : any;
 
 @Component({
@@ -14,6 +15,7 @@ declare var Swal : any;
 export class ProductoComponent implements OnInit {
   lista : Producto[];
   estado : boolean = false;
+  url = environment.uri;
   constructor(private productoService:ProductoService,
               private utilsService : UtilsService,
               public router:Router,
