@@ -56,13 +56,13 @@ export class ProductoService {
   cargarImagen(id_prod:number, photo: File):Observable<string> {
     const fd = new FormData();    
     fd.append('file', photo);
-    return this.http.post<string>(this.url+'subirArchivo/'+id_prod, fd);
+    return this.http.post<string>(this.url+'agregarCloudinary/'+id_prod, fd);
   }
 
   actualizarImagen(id_img:number , photo : File):Observable<string>{
     const fd = new FormData();    
     fd.append('file', photo);
-    return this.http.put<string>(this.url+'subirArchivo/'+id_img, fd);
+    return this.http.put<string>(this.url+'actualizarCloudinary/'+id_img, fd);
   }
 
   /*buscarProductoTexto(texto : string):Observable<Producto[]>{

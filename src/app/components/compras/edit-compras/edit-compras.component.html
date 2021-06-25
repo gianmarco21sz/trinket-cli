@@ -69,7 +69,7 @@
                 <tbody>
                     <tr *ngFor="let prod of listaDetalle;let i = index">
                         <td style="font-weight: bold;">{{i+1}}</td>
-                        <td><img style="border-radius: 0px;height: 50px;width: 50px;" src="http://192.168.1.13:1151/api/producto/verArchivo/{{prod.nom_imagen}}" alt=""></td>
+                        <td><img style="border-radius: 0px;height: 50px;width: 50px;" src="{{prod.nom_imagen}}" alt=""></td>
                         <td>{{prod.nom_prod}}</td>
                         <td><input type="number" step="any" [disabled]="+eCompra.est_ord_cab === 2" style="color: black;" (keypress)="soloNumeros($event)" (keyup)="aumentar(prod)"  maxlength="3" [(ngModel)]="prod.cant_ord_det" class="form-control" value="{{prod.cant_ord_det}}"></td>
                         <td><input type="number" step="any" [disabled]="+eCompra.est_ord_cab === 2" style="color: black;" (keyup)="aumentarPrecio(prod)"  maxlength="9" [(ngModel)]="prod.unit_price_ord_det" class="form-control" value="{{prod.unit_price_ord_det}}"></td>

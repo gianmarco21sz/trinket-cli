@@ -76,11 +76,11 @@
         </ul>
       </div>
     </li>
-    <li class="nav-item" [ngClass]="{ 'active': producto.isActive }" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador'">
+    <!--<li class="nav-item" [ngClass]="{ 'active': producto.isActive }" *ngIf="empleadoService.empleadolog.nombre_rol === 'Administrador'">
       <a class="nav-link" (click)="this.router.navigateByUrl('/menu/(opt:backupRestore)');" routerLinkActive #producto="routerLinkActive">
         <span class="menu-title">Backup y Restore</span>
         <i class="fas fa-database menu-icon" style="color:#EA320B;"></i>        
       </a>
-    </li> 
+    </li>-->
   </ul>
 </nav>

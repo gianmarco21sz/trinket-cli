@@ -24,7 +24,7 @@
           <div class="dropdown-item"  *ngFor="let it of this.compraService.items" style="cursor:default ;height: 100px;">
             <div class="d-flex justify-content-between">
               <div class="col-md-3">
-                <img src="http://192.168.1.13:1151/api/producto/verArchivo/{{it.imagen}}" alt="" height="50px" width="50px">            
+                <img src="{{it.imagen}}" alt="" height="50px" width="50px">            
               </div>
               <div class="col-md-5">
                 {{it.nombre_prod.toString().substr(0,9)+'...'}}&nbsp; 

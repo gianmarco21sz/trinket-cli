@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
       title: 'Confirme acción',
       html: `Seguro de eliminar producto del carrito?:<br/><br/>
             <img style="height: 50px;width: 50px;" 
-            src="http://192.168.1.13:1151/api/producto/verArchivo/${imagen}" 
+            src="${imagen}" 
             class="card-img-top mx-auto"
             alt="">&nbsp;&nbsp;&nbsp; ${producto}`,      
       icon: 'warning',

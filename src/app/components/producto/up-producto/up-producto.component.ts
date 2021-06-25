@@ -109,7 +109,7 @@ export class UpProductoComponent implements OnInit {
       let asd = 0;
       this.imagenesArr = data;      
       for(let o of data){            
-        this.imagenes[asd] =  `http://192.168.1.13:1151/api/producto/verArchivo/${o.nom_imagen}`
+        this.imagenes[asd] =  `${o.nom_imagen}`
         asd++;
       }
       /*this.imagenes1 = `http://192.168.1.13:1151/api/producto/verArchivo/${data[0].nom_imagen}`;

@@ -78,7 +78,7 @@ const routes: Routes = [
     { path: 'proveedor',outlet:'opt', component: ProveedorComponent}, 
     { path: 'addProveedor',outlet:'opt', component: AddProveedorComponent}, 
     { path: 'upProveedor/:id_prov',outlet:'opt', component: UpProveedorComponent}, 
-    { path: 'backupRestore',outlet:'opt', component: BackrestComponent},
+    //{ path: 'backupRestore',outlet:'opt', component: BackrestComponent},
     { path: 'cliente',outlet:'opt', component: ClienteComponent},
     { path: 'listaCompras',outlet:'opt', component: ListaComprasComponent},
     { path: 'listaInvoice',outlet:'opt', component: ListaInvoiceComponent},

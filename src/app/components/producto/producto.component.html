@@ -33,7 +33,7 @@
                     <tr *ngFor="let u of lista; let i =index">
                         <td style="font-weight: bold;">{{i+1}}</td>
                         <td hidden>{{u.id_prod}}</td>                                                             
-                        <td class="d-flex justify-content-center"><img src='http://192.168.1.13:1151/api/producto/verArchivo/{{u.nom_producto}}' style="border-radius: 0px;width: 50px;height: 50px;" alt=""></td>
+                        <td class="d-flex justify-content-center"><img src='{{u.nom_producto}}' style="border-radius: 0px;width: 50px;height: 50px;" alt=""></td>
                         <td>{{u.nom_prod.toString().substr(0,25)+'...'}}</td>
                         <td>{{u.nom_cat}}</td>
                         <td>{{u.stock_prod}}</td>
