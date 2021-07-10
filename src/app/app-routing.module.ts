@@ -89,8 +89,8 @@ const routes: Routes = [
     { path: 'perfil',outlet:'opt', component: PerfilComponent},
     { path: '**',outlet:'opt', component:EmpleadoComponent},
   ] },
-  { path: '**', redirectTo: '/menu', pathMatch: 'full' },
-  { path: '**', redirectTo: '/catalogo', pathMatch: 'full' },
+  { path: '**', redirectTo: '/error', pathMatch: 'full' },
+  { path: '**', redirectTo: '/errorCli', pathMatch: 'full' },
   
 ];
 

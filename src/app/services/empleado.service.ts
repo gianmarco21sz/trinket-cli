@@ -25,7 +25,7 @@ export class EmpleadoService {
 
   verificar(){
     if(this.empleadolog == null){
-      this.router.navigate(['/login']);
+      this.router.navigateByUrl('/login');
     }
   }
 
